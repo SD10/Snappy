@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A65039123BBFBA4F9E00384D /* Pods_Snappy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3699F9DE6920943B3495D1 /* Pods_Snappy.framework */; };
-		B081F9A31C9087AE00F18D22 /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B081F9A21C9087AE00F18D22 /* FriendListViewController.swift */; };
+		B081F9A51C90B02D00F18D22 /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B081F9A41C90B02D00F18D22 /* FriendsListViewController.swift */; };
 		B08510DB1C8E9BB5003C7570 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B08510D81C8E9BB5003C7570 /* Bolts.framework */; };
 		B08510DC1C8E9BB5003C7570 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B08510D91C8E9BB5003C7570 /* FBSDKCoreKit.framework */; };
 		B08510DD1C8E9BB5003C7570 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B08510DA1C8E9BB5003C7570 /* FBSDKLoginKit.framework */; };
@@ -28,7 +28,7 @@
 		1405CAD56D9DF58692D284EB /* Pods-Snappy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snappy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snappy/Pods-Snappy.release.xcconfig"; sourceTree = "<group>"; };
 		7B3699F9DE6920943B3495D1 /* Pods_Snappy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snappy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99488A50A0C544A750161BA4 /* Pods-Snappy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snappy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snappy/Pods-Snappy.debug.xcconfig"; sourceTree = "<group>"; };
-		B081F9A21C9087AE00F18D22 /* FriendListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
+		B081F9A41C90B02D00F18D22 /* FriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
 		B08510D81C8E9BB5003C7570 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		B08510D91C8E9BB5003C7570 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		B08510DA1C8E9BB5003C7570 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 				B08B8C821C8E85A900530C9A /* LoginViewController.swift */,
 				B0DFC1641C7E8596003882C1 /* MasterViewController.swift */,
 				B0DFC17D1C7E8820003882C1 /* InboxViewController.swift */,
-				B081F9A21C9087AE00F18D22 /* FriendListViewController.swift */,
+				B081F9A41C90B02D00F18D22 /* FriendsListViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -297,11 +297,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B081F9A51C90B02D00F18D22 /* FriendsListViewController.swift in Sources */,
 				B08B8C831C8E85A900530C9A /* LoginViewController.swift in Sources */,
 				B0DFC16B1C7E8596003882C1 /* Snappy.xcdatamodeld in Sources */,
 				B0DFC1651C7E8596003882C1 /* MasterViewController.swift in Sources */,
 				B08510DF1C8EACDB003C7570 /* DataService.swift in Sources */,
-				B081F9A31C9087AE00F18D22 /* FriendListViewController.swift in Sources */,
 				B08510E21C8EB3D5003C7570 /* Constants.swift in Sources */,
 				B0DFC1631C7E8596003882C1 /* AppDelegate.swift in Sources */,
 				B0DFC17E1C7E8820003882C1 /* InboxViewController.swift in Sources */,

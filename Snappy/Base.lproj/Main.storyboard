@@ -192,10 +192,10 @@
             </objects>
             <point key="canvasLocation" x="259" y="418"/>
         </scene>
-        <!--Friendlist View Controller-->
+        <!--Friends List View Controller-->
         <scene sceneID="GeO-Jx-IGS">
             <objects>
-                <viewController id="doX-nH-jMC" customClass="FriendlistViewController" customModule="Snappy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="doX-nH-jMC" customClass="FriendsListViewController" customModule="Snappy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FEb-hH-FXU"/>
                         <viewControllerLayoutGuide type="bottom" id="Yln-lt-OVL"/>
