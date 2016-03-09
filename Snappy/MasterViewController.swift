@@ -14,7 +14,8 @@ import AVFoundation
 class MasterViewController: UIViewController {
     
     
-    @IBOutlet weak var previewView: UIImageView!
+    
+    @IBOutlet var previewView: UIView!
     
     var captureSession: AVCaptureSession!
     var stillImageOutput: AVCaptureStillImageOutput!
@@ -63,12 +64,7 @@ class MasterViewController: UIViewController {
         // sets the preview to fill entire layer
         previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         previewLayer.frame = previewView.bounds
-        previewView.layer.addSublayer(previewLayer)
-    }
-    
-    @IBAction func didPressFlipCamera(sender: UIButton) {
-        // temporarily broken
-        // for lack of a "a better way to do this"
+        previewView.layer.insertSublayer(previewLayer, atIndex: 0)
     }
     
     @IBAction func didPressCapturePhoto(sender: AnyObject) {

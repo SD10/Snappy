@@ -134,7 +134,32 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gwr-vg-Peb" userLabel="camera_preview">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="emk-7I-HRd">
+                                        <rect key="frame" x="417" y="481" width="62" height="72"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                        <state key="normal" title="&gt;&gt;">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="doX-nH-jMC" kind="show" id="yNT-9T-K1t"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GL0-cw-0FZ">
+                                        <rect key="frame" x="122" y="481" width="62" height="72"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                        <state key="normal" title="&lt;&lt;">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="gbb-C7-iRw" kind="show" id="zgo-Eb-Xxe"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="0.1764705882" green="0.1843137255" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="GL0-cw-0FZ" firstAttribute="centerY" secondItem="emk-7I-HRd" secondAttribute="centerY" id="xfY-Jj-2b4"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3C-Fn-ika">
                                 <rect key="frame" x="274" y="475" width="53" height="84"/>
@@ -149,7 +174,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="C3C-Fn-ika" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5li-Xk-GKC"/>
+                            <constraint firstItem="GL0-cw-0FZ" firstAttribute="centerY" secondItem="C3C-Fn-ika" secondAttribute="centerY" id="C7o-hO-Byr"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="C3C-Fn-ika" secondAttribute="bottom" constant="41" id="OGk-6b-0h2"/>
+                            <constraint firstItem="C3C-Fn-ika" firstAttribute="leading" secondItem="GL0-cw-0FZ" secondAttribute="trailing" constant="90" id="SLD-nz-A6i"/>
+                            <constraint firstItem="emk-7I-HRd" firstAttribute="leading" secondItem="C3C-Fn-ika" secondAttribute="trailing" constant="90" id="WEd-jl-yVJ"/>
                             <constraint firstAttribute="trailing" secondItem="Gwr-vg-Peb" secondAttribute="trailing" id="WHl-iV-he1"/>
                             <constraint firstItem="Gwr-vg-Peb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="tvj-Jq-UNO"/>
                             <constraint firstItem="Gwr-vg-Peb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="uKO-fA-UQy"/>
@@ -164,10 +192,40 @@
             </objects>
             <point key="canvasLocation" x="259" y="418"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--Friendlist View Controller-->
+        <scene sceneID="GeO-Jx-IGS">
+            <objects>
+                <viewController id="doX-nH-jMC" customClass="FriendlistViewController" customModule="Snappy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FEb-hH-FXU"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yln-lt-OVL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="05O-y0-ZVs">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the friends list view" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwZ-Lb-nyS">
+                                <rect key="frame" x="199" y="40" width="202" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="gwZ-Lb-nyS" firstAttribute="centerX" secondItem="05O-y0-ZVs" secondAttribute="centerX" id="bck-Qm-z7A"/>
+                            <constraint firstItem="gwZ-Lb-nyS" firstAttribute="top" secondItem="FEb-hH-FXU" secondAttribute="bottom" constant="20" id="pve-Yq-PeC"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2mM-1R-1ao" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1024" y="801"/>
+        </scene>
+        <!--Inbox View Controller-->
         <scene sceneID="Ea7-8s-Q5f">
             <objects>
-                <viewController id="gbb-C7-iRw" customClass="DetailViewController" customModule="Snappy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gbb-C7-iRw" customClass="InboxViewController" customModule="Snappy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7qW-iV-lJz"/>
                         <viewControllerLayoutGuide type="bottom" id="xh0-FK-Tb8"/>
@@ -175,12 +233,24 @@
                     <view key="view" contentMode="scaleToFill" id="sMO-M6-pcu">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the inbox view" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18p-F2-N5x">
+                                <rect key="frame" x="218" y="40" width="164" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.16293069439999999" green="1" blue="0.98249705170000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="18p-F2-N5x" firstAttribute="centerX" secondItem="sMO-M6-pcu" secondAttribute="centerX" id="RTi-5T-yV5"/>
+                            <constraint firstItem="18p-F2-N5x" firstAttribute="top" secondItem="7qW-iV-lJz" secondAttribute="bottom" constant="20" id="mhl-yl-LKw"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PyP-or-yjQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1023" y="418"/>
+            <point key="canvasLocation" x="1024" y="-41"/>
         </scene>
     </scenes>
     <resources>
