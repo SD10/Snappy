@@ -11,6 +11,8 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
+    
+    // Initial commit
 
     @IBOutlet weak var loginBackground: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
