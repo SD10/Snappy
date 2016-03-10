@@ -13,8 +13,6 @@ import AVFoundation
 
 class MasterViewController: UIViewController {
     
-    
-    
     @IBOutlet var previewView: UIView!
     
     var captureSession: AVCaptureSession!
@@ -22,6 +20,7 @@ class MasterViewController: UIViewController {
     var previewLayer: AVCaptureVideoPreviewLayer!           // the video preview, subLayers previewView
     var imageLayer: CALayer!
     var capturedImage: UIImage!
+    var currentCaptureDevice: AVCaptureDevice!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +33,7 @@ class MasterViewController: UIViewController {
         
         // Creating input devices for the front and back cameras
         let backCamera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        currentCaptureDevice = backCamera
         
         do {
             let input = try AVCaptureDeviceInput(device: backCamera)
@@ -65,6 +65,40 @@ class MasterViewController: UIViewController {
         previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         previewLayer.frame = previewView.bounds
         previewView.layer.insertSublayer(previewLayer, atIndex: 0)
+    }
+    
+    @IBAction func didPressFlipCamera(sender: UIButton) {
+        var newDevice: AVCaptureDevice = currentCaptureDevice
+        
+        if currentCaptureDevice.position == .Back {
+            // front camera device
+            let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
+            for device in devices {
+                if device.position == .Front {
+                    newDevice = device as! AVCaptureDevice
+                    currentCaptureDevice = newDevice
+                }
+            }
+        } else if currentCaptureDevice.position == .Front {
+            // back camera device
+            newDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+            currentCaptureDevice = newDevice
+        }
+        
+        do {
+            let newInput = try AVCaptureDeviceInput(device: newDevice)
+            // FIX, FIX, FIX!!!
+            let currentInput = captureSession.inputs[0] as! AVCaptureInput
+            
+            captureSession.beginConfiguration()
+            captureSession.removeInput(currentInput)
+            captureSession.addInput(newInput)
+            captureSession.commitConfiguration()
+            
+            print("Successfully flipped the cameara!")
+        } catch {
+            print("Error: occured when assigning input device in flip camera.")
+        }
     }
     
     @IBAction func didPressCapturePhoto(sender: AnyObject) {

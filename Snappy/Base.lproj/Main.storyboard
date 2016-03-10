@@ -142,15 +142,6 @@
                                     <segue destination="doX-nH-jMC" kind="show" id="yNT-9T-K1t"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3C-Fn-ika">
-                                <rect key="frame" x="274" y="496" width="53" height="84"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="@"/>
-                                <connections>
-                                    <action selector="didPressCapturePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="K9j-LG-UbG"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GL0-cw-0FZ">
                                 <rect key="frame" x="151" y="502" width="33" height="72"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -161,11 +152,31 @@
                                     <segue destination="gbb-C7-iRw" kind="show" id="zgo-Eb-Xxe"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3C-Fn-ika">
+                                <rect key="frame" x="274" y="496" width="53" height="84"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="@"/>
+                                <connections>
+                                    <action selector="didPressCapturePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="K9j-LG-UbG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjv-K4-5aK">
+                                <rect key="frame" x="524" y="28" width="56" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="flip?"/>
+                                <connections>
+                                    <action selector="didPressFlipCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ofg-OQ-MOQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.86666666670000003" green="0.85882352939999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="emk-7I-HRd" firstAttribute="leading" secondItem="C3C-Fn-ika" secondAttribute="trailing" constant="90" id="3Am-f1-dYT"/>
                             <constraint firstItem="C3C-Fn-ika" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5li-Xk-GKC"/>
+                            <constraint firstAttribute="trailing" secondItem="xjv-K4-5aK" secondAttribute="trailing" constant="20" id="Lq8-l4-V6T"/>
+                            <constraint firstItem="xjv-K4-5aK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="MAB-O1-o9Q"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="C3C-Fn-ika" secondAttribute="bottom" constant="20" id="OGk-6b-0h2"/>
                             <constraint firstItem="C3C-Fn-ika" firstAttribute="centerY" secondItem="GL0-cw-0FZ" secondAttribute="centerY" id="RDh-Xf-RRq"/>
                             <constraint firstItem="emk-7I-HRd" firstAttribute="centerY" secondItem="GL0-cw-0FZ" secondAttribute="centerY" id="gOY-PN-KZ4"/>
