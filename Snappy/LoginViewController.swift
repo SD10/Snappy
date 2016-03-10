@@ -135,8 +135,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         print("Logged In! \(authData)")
                         /* This is very bad but would need more error handling to avoid this force unwrap.
                              Create a firebase user */
-                        //let user = ["provider": authData.provider!, "blah": "test"]
-                        //DataService.dataService.createFirebaseUser(authData.uid, user: user)
+                        let user = ["provider": authData.provider!]
+                        DataService.dataService.createFirebaseUser(authData.uid, user: user)
                         NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
                         self.performSegueWithIdentifier("loggedIn", sender: nil)
                     }
@@ -159,6 +159,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     } else if error.code == STATUS_ACCOUNT_NONEXIST {
                         self.showErrorAlert("Email or Password Invalid", message: "Please enter a valid email and password")
                     }
+                } else {
+                    NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
+                    self.performSegueWithIdentifier("loggedIn", sender: nil)
                 }
             })
             
@@ -198,8 +201,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                                 // Log In User After Creating Account
                                 NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID], forKey: KEY_UID)
                                 DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
-                                    //let user = ["provider": authData.provider!, "password": "\(pwd)"]
-                                    //DataService.dataService.createFirebaseUser(authData.uid, user: user)
+                                    let user = ["provider": authData.provider!, "password": "\(pwd)", "email": "\(email)"]
+                                    DataService.dataService.createFirebaseUser(authData.uid, user: user)
                                 })
                                 self.performSegueWithIdentifier("loggedIn", sender: nil)
                             }
