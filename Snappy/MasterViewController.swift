@@ -18,7 +18,6 @@ class MasterViewController: UIViewController {
     var captureSession: AVCaptureSession!
     var stillImageOutput: AVCaptureStillImageOutput!
     var previewLayer: AVCaptureVideoPreviewLayer!           // the video preview, subLayers previewView
-    var imageLayer: CALayer!
     var capturedImage: UIImage!
     var currentCaptureDevice: AVCaptureDevice!
     
