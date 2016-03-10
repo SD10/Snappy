@@ -10,10 +10,9 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    // Initial commit
-
+    // MARK: - @IBOutlets
     @IBOutlet weak var loginBackground: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -21,8 +20,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var facebookButton: UIButton!
     
+    // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Set UITextField Delegates
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         
         //Format UIElements
         loginBackground.alpha = 0.72
@@ -48,6 +53,8 @@ class LoginViewController: UIViewController {
             self.performSegueWithIdentifier("loggedIn", sender: self)
         }
     }
+    
+    // MARK: - UI Formatting
     
     // Formats the visual appearance of UITextField, refactor for MVC later
     func formatTextField(textField: UITextField) {
@@ -75,6 +82,8 @@ class LoginViewController: UIViewController {
         emailTextField.alpha = 0
         passwordTextField.alpha = 0
     }
+    
+    // MARK: - Animations
     
     // Animation - Fade in UIElements
     func fadeInItems() {
@@ -106,6 +115,7 @@ class LoginViewController: UIViewController {
         })
     }
     
+    // MARK: - Login In / Sign Up
     
     // Sign in with Facebook
     @IBAction func facebookPressed(sender: UIButton!) {
@@ -197,17 +207,16 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // MARK: - Keyboard Management
+
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        view.endEditing(true)
+    }
     
     
 
