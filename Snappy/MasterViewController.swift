@@ -11,7 +11,7 @@
 import UIKit
 import AVFoundation
 
-class MasterViewController: UIViewController {
+class MasterViewController: UIViewController, LoginViewControllerDelegate {
     
     @IBOutlet var previewView: UIView!
     
@@ -50,6 +50,14 @@ class MasterViewController: UIViewController {
         // Begins capture session on separate thread of high priority
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
             self.captureSession.startRunning()
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        // Check if user is already logged in, if so, proceed
+        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) == nil {
+            performSegueWithIdentifier("presentLogin", sender: nil)
         }
     }
     
@@ -112,6 +120,18 @@ class MasterViewController: UIViewController {
                 UIImageWriteToSavedPhotosAlbum(self.capturedImage, nil, nil, nil)
                 print("Image capture success!")
             }
+        }
+    }
+    
+    // Did Login Successfully
+    func didLoginSuccessfully() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "presentLogin" {
+            let loginViewController = segue.destinationViewController as! LoginViewController
+            loginViewController.delegate = self
         }
     }
 }
