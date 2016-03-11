@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import Firebase
 
 class FriendsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var fakeUsers = [String](count: 20, repeatedValue: "User")
-
+    var testUsers = [User]()
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -20,6 +21,25 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     // Set tableview delegate and datasource
     tableView.delegate = self
     tableView.dataSource = self
+        
+        DataService.dataService.REF_USERS.observeEventType(.Value, withBlock: { snapshot in
+            
+            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+                self.testUsers.removeAll()
+                for snap in snapshots {
+                    print("SNAP: \(snap)")
+                    
+                    if let userDict = snap.value as? [String: AnyObject] {
+                        let key = snap.key
+                        let user = User(userID: key, dictionary: userDict)
+                        self.testUsers.append(user)
+                    }
+                }
+            }
+            
+            self.tableView.reloadData()
+            
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,12 +51,13 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fakeUsers.count
+        return testUsers.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as? UserCell {
-            cell.username.text = "User \(indexPath.row)"
+            let user = testUsers[indexPath.row]
+            cell.username.text = user.email
             return cell
         } else {
             return UITableViewCell()
@@ -45,7 +66,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            fakeUsers.removeAtIndex(indexPath.row)
+            testUsers.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
