@@ -32,8 +32,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //Format UIElements
         loginBackground.alpha = 0.72
         setAlphaZero()
-        formatTextField(emailTextField)
-        formatTextField(passwordTextField)
         formatButton(loginButton)
         formatButton(facebookButton)
         formatButton(signupButton)
@@ -56,20 +54,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - UI Formatting
     
-    // Formats the visual appearance of UITextField, refactor for MVC later
-    func formatTextField(textField: UITextField) {
-        let boneColor = UIColor(red: 255.0/255.0, green: 251.0/255.0, blue: 230.0/255.0, alpha: 1.0)
-        textField.borderStyle = .RoundedRect
-        textField.clearButtonMode = .WhileEditing
-        textField.textColor = boneColor
-        textField.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.3)
-        textField.layer.borderColor = boneColor.CGColor
-        textField.layer.borderWidth = 2.0
-        textField.layer.cornerRadius = 8.0
-        textField.attributedPlaceholder = NSAttributedString(string: "\(textField.placeholder!)", attributes: [NSForegroundColorAttributeName: boneColor])
-    }
-    
-    // Formats the visual appearance of UIButton, refactor for MVC later
+    // Formats the visual appearance of UIButton
     func formatButton(button: UIButton) {
         button.layer.cornerRadius = 12.0
     }
@@ -87,7 +72,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // Animation - Fade in UIElements
     func fadeInItems() {
-        UITextField.animateWithDuration(2) { () -> Void in
+        LoginTextField.animateWithDuration(2) { () -> Void in
             self.emailTextField.alpha = 1.0
             self.passwordTextField.alpha = 1.0
         }

@@ -32,7 +32,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="tVt-gW-9RW">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xaj-RV-9X4">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xaj-RV-9X4" customClass="LoginTextField" customModule="Snappy" customModuleProvider="target">
                                 <rect key="frame" x="20" y="288" width="560" height="30"/>
                                 <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -73,7 +73,7 @@
                                     <action selector="attemptLogin:" destination="yhm-am-2iw" eventType="touchUpInside" id="Piy-h3-bIh"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w13-h3-ebc">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w13-h3-ebc" customClass="LoginTextField" customModule="Snappy" customModuleProvider="target">
                                 <rect key="frame" x="20" y="338" width="560" height="30"/>
                                 <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
