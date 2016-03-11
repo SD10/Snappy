@@ -171,6 +171,15 @@
                                     <action selector="didPressFlipCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ofg-OQ-MOQ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Qb-bp-RwQ">
+                                <rect key="frame" x="20" y="0.0" width="30" height="84"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="60"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="x"/>
+                                <connections>
+                                    <action selector="cancelEditImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BPm-vf-fIe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.86666666670000003" green="0.85882352939999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -180,11 +189,18 @@
                             <constraint firstItem="xjv-K4-5aK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="MAB-O1-o9Q"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="C3C-Fn-ika" secondAttribute="bottom" constant="20" id="OGk-6b-0h2"/>
                             <constraint firstItem="C3C-Fn-ika" firstAttribute="centerY" secondItem="GL0-cw-0FZ" secondAttribute="centerY" id="RDh-Xf-RRq"/>
+                            <constraint firstItem="8Qb-bp-RwQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="djg-hr-ckn"/>
                             <constraint firstItem="emk-7I-HRd" firstAttribute="centerY" secondItem="GL0-cw-0FZ" secondAttribute="centerY" id="gOY-PN-KZ4"/>
+                            <constraint firstItem="xjv-K4-5aK" firstAttribute="baseline" secondItem="8Qb-bp-RwQ" secondAttribute="baseline" id="laO-ic-gIj"/>
                             <constraint firstItem="C3C-Fn-ika" firstAttribute="leading" secondItem="GL0-cw-0FZ" secondAttribute="trailing" constant="90" id="to1-rL-9Of"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="8Qb-bp-RwQ" id="69v-cg-PJY"/>
+                        <outlet property="captureButton" destination="C3C-Fn-ika" id="d8Q-fm-CDf"/>
+                        <outlet property="flipButton" destination="xjv-K4-5aK" id="1nC-uk-bR2"/>
+                        <outlet property="friendsListButton" destination="emk-7I-HRd" id="njG-hI-auy"/>
+                        <outlet property="inboxButton" destination="GL0-cw-0FZ" id="bie-bX-QeD"/>
                         <outlet property="previewView" destination="8bC-Xf-vdC" id="gcH-Ax-OdB"/>
                     </connections>
                 </viewController>
@@ -225,7 +241,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHv-7K-5lo">
                                                     <rect key="frame" x="56" y="37" width="38" height="24"/>
                                                     <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -321,7 +337,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the inbox view" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18p-F2-N5x">
                                 <rect key="frame" x="218" y="40" width="164" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

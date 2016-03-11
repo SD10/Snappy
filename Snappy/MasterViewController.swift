@@ -20,6 +20,17 @@ class MasterViewController: UIViewController {
     var previewLayer: AVCaptureVideoPreviewLayer!           // the video preview, subLayers previewView
     var capturedImage: UIImage!
     var currentCaptureDevice: AVCaptureDevice!
+    var imageView: UIImageView!
+    
+    @IBOutlet weak var captureButton: UIButton!
+    @IBOutlet weak var inboxButton: UIButton!
+    @IBOutlet weak var friendsListButton: UIButton!
+    @IBOutlet weak var flipButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton! {
+        didSet {
+            cancelButton.hidden = true
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +111,15 @@ class MasterViewController: UIViewController {
         }
     }
     
+    @IBAction func cancelEditImage(sender: UIButton) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
+            self.captureSession.startRunning()
+        }
+        imageView.hidden = true
+        cancelButton.hidden = true
+        hideCaptureInterface(false)
+    }
+    
     @IBAction func didPressCapturePhoto(sender: AnyObject) {
         let videoConnection = stillImageOutput.connectionWithMediaType(AVMediaTypeVideo)
         stillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection) {
@@ -109,10 +129,23 @@ class MasterViewController: UIViewController {
             } else {
                 let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
                 self.capturedImage = UIImage(data: imageData)
-                UIImageWriteToSavedPhotosAlbum(self.capturedImage, nil, nil, nil)
                 print("Image capture success!")
             }
         }
+        
+        imageView = UIImageView(image: capturedImage)
+        imageView.bounds = previewView.bounds
+        previewView.addSubview(imageView)
+        hideCaptureInterface(true)
+        cancelButton.hidden = false
+        captureSession.stopRunning()
+    }
+    
+    func hideCaptureInterface(hidden: Bool) {
+        captureButton.hidden = hidden
+        friendsListButton.hidden = hidden
+        inboxButton.hidden = hidden
+        flipButton.hidden = hidden
     }
 }
 
