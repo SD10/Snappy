@@ -12,6 +12,8 @@ class User {
     private var _userID: String!
     private var _provider: String!
     private var _email: String?
+    private var _displayName: String?
+    private var _profileImageURL: String?
     
     var userID: String {
         return _userID
@@ -25,6 +27,14 @@ class User {
         return _email
     }
     
+    var displayName: String? {
+        return _displayName
+    }
+    
+    var profileImageURL: String? {
+        return _profileImageURL
+    }
+    
     init(userID: String, dictionary: [String: AnyObject]) {
         self._userID = userID
         if let provider = dictionary["provider"] as? String {
@@ -33,6 +43,14 @@ class User {
         
         if let email = dictionary["email"] as? String {
             self._email = email
+        }
+        
+        if let name = dictionary["displayName"] as? String {
+            self._displayName = name
+        }
+        
+        if let imageURL = dictionary["profileImageURL"] as? String {
+            self._profileImageURL = imageURL
         }
     }
     

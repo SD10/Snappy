@@ -28,7 +28,7 @@ class DataService {
         return _REF_MSGS
     }
     
-    func createFirebaseUser(uid: String, user: [String:String]) {
+    func createFirebaseUser(uid: String, user: [String: AnyObject]) {
         REF_USERS.childByAppendingPath(uid).setValue(user)
     }
     

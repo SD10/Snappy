@@ -120,7 +120,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         print("Logged In! \(authData)")
                         /* This is very bad but would need more error handling to avoid this force unwrap.
                              Create a firebase user */
-                        let user = ["provider": authData.provider!]
+                        let user = ["provider": authData.provider!, "displayName": authData.providerData["displayName"]!, "email": authData.providerData["email"]!, "profileImage": authData.providerData["profileImageURL"]!]
                         DataService.dataService.createFirebaseUser(authData.uid, user: user)
                         NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
                         self.performSegueWithIdentifier("loggedIn", sender: nil)
