@@ -10,10 +10,9 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    // Initial commit
-
+    // MARK: - @IBOutlets
     @IBOutlet weak var loginBackground: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -21,8 +20,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var facebookButton: UIButton!
     
+    // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Set UITextField Delegates
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         
         //Format UIElements
         loginBackground.alpha = 0.72
@@ -48,6 +53,8 @@ class LoginViewController: UIViewController {
             self.performSegueWithIdentifier("loggedIn", sender: self)
         }
     }
+    
+    // MARK: - UI Formatting
     
     // Formats the visual appearance of UITextField, refactor for MVC later
     func formatTextField(textField: UITextField) {
@@ -75,6 +82,8 @@ class LoginViewController: UIViewController {
         emailTextField.alpha = 0
         passwordTextField.alpha = 0
     }
+    
+    // MARK: - Animations
     
     // Animation - Fade in UIElements
     func fadeInItems() {
@@ -106,6 +115,7 @@ class LoginViewController: UIViewController {
         })
     }
     
+    // MARK: - Login In / Sign Up
     
     // Sign in with Facebook
     @IBAction func facebookPressed(sender: UIButton!) {
@@ -123,6 +133,10 @@ class LoginViewController: UIViewController {
                         print("Login failed. \(error)")
                     } else {
                         print("Logged In! \(authData)")
+                        /* This is very bad but would need more error handling to avoid this force unwrap.
+                             Create a firebase user */
+                        let user = ["provider": authData.provider!]
+                        DataService.dataService.createFirebaseUser(authData.uid, user: user)
                         NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
                         self.performSegueWithIdentifier("loggedIn", sender: nil)
                     }
@@ -145,6 +159,9 @@ class LoginViewController: UIViewController {
                     } else if error.code == STATUS_ACCOUNT_NONEXIST {
                         self.showErrorAlert("Email or Password Invalid", message: "Please enter a valid email and password")
                     }
+                } else {
+                    NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
+                    self.performSegueWithIdentifier("loggedIn", sender: nil)
                 }
             })
             
@@ -183,7 +200,10 @@ class LoginViewController: UIViewController {
                             } else {
                                 // Log In User After Creating Account
                                 NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID], forKey: KEY_UID)
-                                DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: nil)
+                                DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
+                                    let user = ["provider": authData.provider!, "password": "\(pwd)", "email": "\(email)"]
+                                    DataService.dataService.createFirebaseUser(authData.uid, user: user)
+                                })
                                 self.performSegueWithIdentifier("loggedIn", sender: nil)
                             }
                         })
@@ -197,17 +217,16 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // MARK: - Keyboard Management
+
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        view.endEditing(true)
+    }
     
     
 
