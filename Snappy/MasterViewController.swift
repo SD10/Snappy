@@ -34,9 +34,11 @@ class MasterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // TO BE REFACTORED
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
         // Creating and initializing the capture session w/ photo preset
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = AVCaptureSessionPresetPhoto
@@ -58,6 +60,13 @@ class MasterViewController: UIViewController {
         stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
         captureSession.addOutput(stillImageOutput)
         
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        
+        // sets the preview to fill entire layer
+        previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        previewLayer.frame = previewView.bounds
+        previewView.layer.insertSublayer(previewLayer, atIndex: 0)
+        
         // Begins capture session on separate thread of high priority
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
             self.captureSession.startRunning()
@@ -66,15 +75,6 @@ class MasterViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        
-        // sets the preview to fill entire layer
-        previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-        previewLayer.frame = previewView.bounds
-        previewView.layer.insertSublayer(previewLayer, atIndex: 0)
     }
     
     @IBAction func didPressFlipCamera(sender: UIButton) {
@@ -116,7 +116,7 @@ class MasterViewController: UIViewController {
             self.captureSession.startRunning()
         }
         imageView.hidden = true
-        cancelButton.hidden = true
+        hideEditInterface(true)
         hideCaptureInterface(false)
     }
     
@@ -137,7 +137,7 @@ class MasterViewController: UIViewController {
         imageView.bounds = previewView.bounds
         previewView.addSubview(imageView)
         hideCaptureInterface(true)
-        cancelButton.hidden = false
+        hideEditInterface(false)
         captureSession.stopRunning()
     }
     
@@ -146,6 +146,10 @@ class MasterViewController: UIViewController {
         friendsListButton.hidden = hidden
         inboxButton.hidden = hidden
         flipButton.hidden = hidden
+    }
+    
+    func hideEditInterface(hidden: Bool) {
+        cancelButton.hidden = hidden
     }
 }
 

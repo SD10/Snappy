@@ -140,7 +140,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="doX-nH-jMC" kind="show" identifier="showFriendListViewController" id="yNT-9T-K1t"/>
+                                    <segue destination="doX-nH-jMC" kind="showDetail" identifier="showFriendListViewController" action="showViewController:sender:" id="yNT-9T-K1t"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GL0-cw-0FZ">
@@ -150,7 +150,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="gbb-C7-iRw" kind="show" identifier="showInboxViewController" id="zgo-Eb-Xxe"/>
+                                    <segue destination="gbb-C7-iRw" kind="showDetail" identifier="showInboxViewController" action="showViewController:sender:" id="zgo-Eb-Xxe"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3C-Fn-ika">
