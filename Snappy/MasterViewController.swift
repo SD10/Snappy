@@ -32,6 +32,7 @@ class MasterViewController: UIViewController {
         }
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -111,7 +112,7 @@ class MasterViewController: UIViewController {
         }
     }
     
-    @IBAction func cancelEditImage(sender: UIButton) {
+    @IBAction func didPressCancelEdit(sender: UIButton) {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
             self.captureSession.startRunning()
         }
@@ -119,6 +120,7 @@ class MasterViewController: UIViewController {
         hideEditInterface(true)
         hideCaptureInterface(false)
     }
+
     
     @IBAction func didPressCapturePhoto(sender: AnyObject) {
         let videoConnection = stillImageOutput.connectionWithMediaType(AVMediaTypeVideo)

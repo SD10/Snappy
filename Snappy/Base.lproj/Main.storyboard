@@ -171,6 +171,15 @@
                                     <action selector="didPressFlipCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ofg-OQ-MOQ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZaG-rg-sSA">
+                                <rect key="frame" x="20" y="19" width="30" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="x"/>
+                                <connections>
+                                    <action selector="didPressCancelEdit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="poY-3o-G2N"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.86666666670000003" green="0.85882352939999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -178,13 +187,16 @@
                             <constraint firstItem="C3C-Fn-ika" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5li-Xk-GKC"/>
                             <constraint firstAttribute="trailing" secondItem="xjv-K4-5aK" secondAttribute="trailing" constant="20" id="Lq8-l4-V6T"/>
                             <constraint firstItem="xjv-K4-5aK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="MAB-O1-o9Q"/>
+                            <constraint firstItem="ZaG-rg-sSA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="Nhc-tj-JnP"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="C3C-Fn-ika" secondAttribute="bottom" constant="20" id="OGk-6b-0h2"/>
                             <constraint firstItem="C3C-Fn-ika" firstAttribute="centerY" secondItem="GL0-cw-0FZ" secondAttribute="centerY" id="RDh-Xf-RRq"/>
+                            <constraint firstItem="xjv-K4-5aK" firstAttribute="baseline" secondItem="ZaG-rg-sSA" secondAttribute="baseline" id="byN-5M-20t"/>
                             <constraint firstItem="emk-7I-HRd" firstAttribute="centerY" secondItem="GL0-cw-0FZ" secondAttribute="centerY" id="gOY-PN-KZ4"/>
                             <constraint firstItem="C3C-Fn-ika" firstAttribute="leading" secondItem="GL0-cw-0FZ" secondAttribute="trailing" constant="90" id="to1-rL-9Of"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="ZaG-rg-sSA" id="cpQ-R4-iOe"/>
                         <outlet property="previewView" destination="8bC-Xf-vdC" id="gcH-Ax-OdB"/>
                     </connections>
                 </viewController>
