@@ -12,6 +12,7 @@
 		B081F9E71C92533C00F18D22 /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B081F9E61C92533C00F18D22 /* LoginTextField.swift */; };
 		B081F9E91C92602500F18D22 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B081F9E81C92602500F18D22 /* UserCell.swift */; };
 		B081F9EB1C92705E00F18D22 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B081F9EA1C92705E00F18D22 /* User.swift */; };
+		B081F9EF1C9357ED00F18D22 /* SignUpInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B081F9EE1C9357ED00F18D22 /* SignUpInfoViewController.swift */; };
 		B08510DB1C8E9BB5003C7570 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B08510D81C8E9BB5003C7570 /* Bolts.framework */; };
 		B08510DC1C8E9BB5003C7570 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B08510D91C8E9BB5003C7570 /* FBSDKCoreKit.framework */; };
 		B08510DD1C8E9BB5003C7570 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B08510DA1C8E9BB5003C7570 /* FBSDKLoginKit.framework */; };
@@ -36,6 +37,7 @@
 		B081F9E61C92533C00F18D22 /* LoginTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		B081F9E81C92602500F18D22 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		B081F9EA1C92705E00F18D22 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B081F9EE1C9357ED00F18D22 /* SignUpInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpInfoViewController.swift; sourceTree = "<group>"; };
 		B08510D81C8E9BB5003C7570 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		B08510D91C8E9BB5003C7570 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		B08510DA1C8E9BB5003C7570 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				B0DFC17D1C7E8820003882C1 /* InboxViewController.swift */,
 				B081F9A41C90B02D00F18D22 /* FriendsListViewController.swift */,
 				C601F6921C935B4100D066AB /* CameraSession.swift */,
+				B081F9EE1C9357ED00F18D22 /* SignUpInfoViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				B08510E21C8EB3D5003C7570 /* Constants.swift in Sources */,
 				B0DFC1631C7E8596003882C1 /* AppDelegate.swift in Sources */,
 				B0DFC17E1C7E8820003882C1 /* InboxViewController.swift in Sources */,
+				B081F9EF1C9357ED00F18D22 /* SignUpInfoViewController.swift in Sources */,
 				B081F9EB1C92705E00F18D22 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,7 +445,7 @@
 					"$(PROJECT_DIR)/Snappy",
 				);
 				INFOPLIST_FILE = Snappy/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swiftsyndicate.Snappy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -462,7 +466,7 @@
 					"$(PROJECT_DIR)/Snappy",
 				);
 				INFOPLIST_FILE = Snappy/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swiftsyndicate.Snappy;
 				PRODUCT_NAME = "$(TARGET_NAME)";

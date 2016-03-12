@@ -10,6 +10,10 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
+protocol LoginViewControllerDelegate {
+    func didLoginSuccessfully()
+}
+
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - @IBOutlets
@@ -19,6 +23,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var facebookButton: UIButton!
+    var delegate: LoginViewControllerDelegate?
     
     // MARK: - View Life Cycle
     
@@ -45,11 +50,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         fadeInItems()
-        
-        // Check if user is already logged in, if so, proceed
-        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
-            self.performSegueWithIdentifier("loggedIn", sender: self)
-        }
     }
     
     // MARK: - UI Formatting
@@ -101,7 +101,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Login In / Sign Up
-    
+
     // Sign in with Facebook
     @IBAction func facebookPressed(sender: UIButton!) {
         let facebookLogin = FBSDKLoginManager()
@@ -123,7 +123,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         let user = ["provider": authData.provider!, "displayName": authData.providerData["displayName"]!, "email": authData.providerData["email"]!, "profileImage": authData.providerData["profileImageURL"]!]
                         DataService.dataService.createFirebaseUser(authData.uid, user: user)
                         NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
-                        self.performSegueWithIdentifier("loggedIn", sender: nil)
+                        self.delegate?.didLoginSuccessfully()
                     }
                 })
             }
@@ -146,7 +146,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     }
                 } else {
                     NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
-                    self.performSegueWithIdentifier("loggedIn", sender: nil)
+                    self.delegate?.didLoginSuccessfully()
                 }
             })
             
@@ -189,13 +189,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                                     let user = ["provider": authData.provider!, "password": "\(pwd)", "email": "\(email)"]
                                     DataService.dataService.createFirebaseUser(authData.uid, user: user)
                                 })
-                                self.performSegueWithIdentifier("loggedIn", sender: nil)
+                                self.performSegueWithIdentifier("addInformation", sender: nil)
                             }
                         })
                     }
                 } else {
                     // No error so log the user in
-                    self.performSegueWithIdentifier("loggedIn", sender: nil)
+                    self.delegate?.didLoginSuccessfully()
                 }
             })
             
