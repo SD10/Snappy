@@ -197,6 +197,10 @@
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="ZaG-rg-sSA" id="cpQ-R4-iOe"/>
+                        <outlet property="captureButton" destination="C3C-Fn-ika" id="JSu-OA-hGD"/>
+                        <outlet property="flipButton" destination="xjv-K4-5aK" id="iNR-V1-CNA"/>
+                        <outlet property="friendsListButton" destination="GL0-cw-0FZ" id="LhO-Ze-S1a"/>
+                        <outlet property="inboxButton" destination="emk-7I-HRd" id="F2Y-Pl-VLr"/>
                         <outlet property="previewView" destination="8bC-Xf-vdC" id="gcH-Ax-OdB"/>
                     </connections>
                 </viewController>
