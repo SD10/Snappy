@@ -178,7 +178,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     // Account doesn't exist, create account
                     } else if error.code == STATUS_ACCOUNT_NONEXIST {
                         DataService.dataService.REF_BASE.createUser(email, password: pwd, withValueCompletionBlock: { error, result in
-                            
+                    
                             if error != nil {
                                 print(error)
                                 self.showErrorAlert("Could not create account", message: "Try something else?")

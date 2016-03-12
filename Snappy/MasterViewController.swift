@@ -31,11 +31,11 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
             cancelButton.hidden = true
         }
     }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -102,13 +102,13 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
             // back camera device
             newDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
             currentCaptureDevice = newDevice
+            
         }
         
         do {
             let newInput = try AVCaptureDeviceInput(device: newDevice)
             // FIX, FIX, FIX!!!
             let currentInput = captureSession.inputs[0] as! AVCaptureInput
-            
             captureSession.beginConfiguration()
             captureSession.removeInput(currentInput)
             captureSession.addInput(newInput)

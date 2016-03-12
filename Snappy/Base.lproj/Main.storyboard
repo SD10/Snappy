@@ -70,45 +70,95 @@
                                 </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bn-v8-mbJ">
-                                <rect key="frame" x="242" y="350" width="117" height="30"/>
+                                <rect key="frame" x="20" y="550" width="560" height="30"/>
                                 <color key="backgroundColor" red="0.23921568630000001" green="0.70196078429999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="4Yh-R4-RY2"/>
                                     <constraint firstAttribute="width" constant="117" id="kz9-bX-GrN"/>
+                                    <constraint firstAttribute="height" constant="30" id="zsh-eW-6fM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="17"/>
                                 <state key="normal" title="Finished">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="4Yh-R4-RY2"/>
+                                        <exclude reference="kz9-bX-GrN"/>
+                                    </mask>
+                                </variation>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a username..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EBS-nx-bmU">
-                                <rect key="frame" x="40" y="296" width="520" height="24"/>
+                                <rect key="frame" x="20" y="445" width="560" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="Pzm-1J-hmu"/>
+                                    <constraint firstAttribute="height" constant="35" id="iFo-Dl-wOT"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Pzm-1J-hmu"/>
+                                    </mask>
+                                </variation>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SQK-K6-BuB">
-                                <rect key="frame" x="225" y="116" width="150" height="150"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagesplaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="SQK-K6-BuB">
+                                <rect key="frame" x="225" y="225" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="YbQ-3c-h9l"/>
                                     <constraint firstAttribute="height" constant="150" id="yZG-uV-beI"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wb7-mh-j4i">
+                                <rect key="frame" x="225" y="225" width="150" height="150"/>
+                                <connections>
+                                    <action selector="addImagePressed:" destination="w5k-hj-3XU" eventType="touchUpInside" id="mPf-k2-RlK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="5bn-v8-mbJ" firstAttribute="top" secondItem="EBS-nx-bmU" secondAttribute="bottom" constant="70" id="1Hg-oX-b9A"/>
                             <constraint firstItem="g8Y-Qn-DCh" firstAttribute="top" secondItem="eug-0K-oq1" secondAttribute="top" id="1es-nV-8uW"/>
+                            <constraint firstItem="EBS-nx-bmU" firstAttribute="top" secondItem="wb7-mh-j4i" secondAttribute="bottom" constant="70" id="3hr-mW-kO8"/>
                             <constraint firstItem="SQK-K6-BuB" firstAttribute="top" secondItem="g8Y-Qn-DCh" secondAttribute="bottom" constant="36" id="4H3-pX-Skb"/>
                             <constraint firstAttribute="trailing" secondItem="g8Y-Qn-DCh" secondAttribute="trailing" id="6sK-ys-i52"/>
                             <constraint firstItem="g8Y-Qn-DCh" firstAttribute="leading" secondItem="eug-0K-oq1" secondAttribute="leading" id="CjB-E1-t3d"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EBS-nx-bmU" secondAttribute="trailing" constant="20" id="Duq-E3-Rne"/>
+                            <constraint firstItem="wb7-mh-j4i" firstAttribute="centerY" secondItem="SQK-K6-BuB" secondAttribute="centerY" id="ECz-kF-chC"/>
+                            <constraint firstItem="SQK-K6-BuB" firstAttribute="centerY" secondItem="eug-0K-oq1" secondAttribute="centerY" id="Jd8-dz-wO3"/>
+                            <constraint firstItem="EBS-nx-bmU" firstAttribute="leading" secondItem="eug-0K-oq1" secondAttribute="leadingMargin" id="Jft-NJ-5ou"/>
+                            <constraint firstItem="5bn-v8-mbJ" firstAttribute="leading" secondItem="eug-0K-oq1" secondAttribute="leadingMargin" id="LmA-IH-kH4"/>
                             <constraint firstItem="EBS-nx-bmU" firstAttribute="leading" secondItem="eug-0K-oq1" secondAttribute="leadingMargin" constant="20" id="Lwp-Xg-gP6"/>
                             <constraint firstItem="SQK-K6-BuB" firstAttribute="centerX" secondItem="eug-0K-oq1" secondAttribute="centerX" id="Ma8-Mc-Nfk"/>
+                            <constraint firstItem="wb7-mh-j4i" firstAttribute="height" secondItem="SQK-K6-BuB" secondAttribute="height" id="Pts-fE-yPm"/>
+                            <constraint firstItem="EBS-nx-bmU" firstAttribute="trailing" secondItem="eug-0K-oq1" secondAttribute="trailingMargin" id="U8Z-Om-DIW"/>
+                            <constraint firstItem="5bn-v8-mbJ" firstAttribute="trailing" secondItem="eug-0K-oq1" secondAttribute="trailingMargin" id="Z81-qv-yXZ"/>
                             <constraint firstItem="5bn-v8-mbJ" firstAttribute="centerX" secondItem="eug-0K-oq1" secondAttribute="centerX" id="a6t-59-N22"/>
                             <constraint firstItem="5bn-v8-mbJ" firstAttribute="top" secondItem="EBS-nx-bmU" secondAttribute="bottom" constant="30" id="aiP-CQ-iEu"/>
+                            <constraint firstItem="wb7-mh-j4i" firstAttribute="width" secondItem="SQK-K6-BuB" secondAttribute="width" id="ayN-EF-0Uf"/>
+                            <constraint firstItem="Cxy-2c-N1s" firstAttribute="top" secondItem="5bn-v8-mbJ" secondAttribute="bottom" constant="20" id="cwS-lI-rWW"/>
                             <constraint firstItem="EBS-nx-bmU" firstAttribute="top" secondItem="SQK-K6-BuB" secondAttribute="bottom" constant="30" id="hSU-In-dZg"/>
+                            <constraint firstItem="wb7-mh-j4i" firstAttribute="centerX" secondItem="SQK-K6-BuB" secondAttribute="centerX" id="o2A-tm-ijx"/>
                             <constraint firstItem="Cxy-2c-N1s" firstAttribute="top" secondItem="5bn-v8-mbJ" secondAttribute="bottom" constant="220" id="oMj-vX-cei"/>
+                            <constraint firstItem="SQK-K6-BuB" firstAttribute="centerX" secondItem="eug-0K-oq1" secondAttribute="centerX" id="yDA-Cn-1zZ"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="4H3-pX-Skb"/>
+                                <exclude reference="Ma8-Mc-Nfk"/>
+                                <exclude reference="Duq-E3-Rne"/>
+                                <exclude reference="Lwp-Xg-gP6"/>
+                                <exclude reference="hSU-In-dZg"/>
+                                <exclude reference="a6t-59-N22"/>
+                                <exclude reference="aiP-CQ-iEu"/>
+                                <exclude reference="oMj-vX-cei"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="selectedImage" destination="SQK-K6-BuB" id="31s-1V-2Py"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kVC-m4-cMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -453,6 +503,7 @@
     <resources>
         <image name="background" width="1920" height="1080"/>
         <image name="camera" width="128" height="128"/>
+        <image name="imagesplaceholder" width="225" height="225"/>
         <image name="logo" width="380" height="146"/>
         <image name="penguin" width="128" height="128"/>
     </resources>

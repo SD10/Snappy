@@ -8,11 +8,17 @@
 
 import UIKit
 
-class SignUpInfoViewController: UIViewController {
+class SignUpInfoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    @IBOutlet weak var selectedImage: UIImageView!
+    var imagePicker: UIImagePickerController!
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
         
     }
     
@@ -26,6 +32,14 @@ class SignUpInfoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        selectedImage.image = image
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func addImagePressed(sender: AnyObject) {
+        presentViewController(imagePicker, animated: true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation
