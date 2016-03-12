@@ -22,6 +22,9 @@ class InboxViewController: UIViewController {
     }
     
 
+    @IBAction func goBackPressed(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 
