@@ -109,6 +109,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
             if facebookError != nil {
                 print("Facebook login failed. Error \(facebookError)")
+            } else if facebookResult.isCancelled {
+                self.dismissViewControllerAnimated(true, completion: nil)
             } else {
                 let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
                 print("Successfully logged in with facebook. \(accessToken)")
