@@ -135,66 +135,50 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // Email-Password Login Attempt
     @IBAction func attemptLogin(sender: UIButton) {
         if let email = emailTextField.text where email != "", let pwd = passwordTextField.text where pwd != "" {
-            
             DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
                 if error != nil {
-                    print(error)
-                    
-                    // Handle Invalid Email
-                    if error.code == STATUS_EMAIL_INVALID {
-                        self.showErrorAlert("Invalid Email", message: "Please enter a valid email")
-                    } else if error.code == STATUS_ACCOUNT_NONEXIST {
-                        self.showErrorAlert("Email or Password Invalid", message: "Please enter a valid email and password")
+                    switch error.code {
+                        case STATUS_EMAIL_INVALID:
+                            self.showErrorAlert("Invalid Email", message: "Please enter a valid email")
+                        case STATUS_ACCOUNT_NONEXIST:
+                            self.showErrorAlert("Email or Password Invalid", message: "Please enter a valid email and password")
+                        default: break
                     }
                 } else {
                     NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
                     self.delegate?.didLoginSuccessfully()
                 }
             })
-            
         } else {
             showErrorAlert("Email and Password Required", message: "Please enter a valid email and password to continue")
         }
-    }
-    
-    func showErrorAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
-        alert.addAction(action)
-        presentViewController(alert, animated: true, completion: nil)
     }
     
     // Sign Up for New Account
     @IBAction func attemptSignUp(sender: UIButton) {
         if let email = emailTextField.text where email != "", let pwd = passwordTextField.text where pwd != "" {
             
-            
             // Account aready exists, then log them in
             DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
                 if error != nil {
-                    print(error.code)
-                    
                     switch error.code {
                         //Handle Invalid Email
                         case STATUS_EMAIL_INVALID:
                             self.showErrorAlert("Invalid Email", message: "Please enter a valid email to sign up")
                         case STATUS_ACCOUNT_NONEXIST:
                             DataService.dataService.REF_BASE.createUser(email, password: pwd, withValueCompletionBlock: { error, result in
-                        print("I'm running")
-                        if error != nil {
-                            print(error)
-                            self.showErrorAlert("Could not create account", message: "Try something else?")
-                        } else {
-                            // Log In User After Creating Account
-                            NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID], forKey: KEY_UID)
-                            DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
-                                let user = ["provider": authData.provider!, "password": "\(pwd)", "email": "\(email)"]
-                                DataService.dataService.createFirebaseUser(authData.uid, user: user)
-                                self.performSegueWithIdentifier("addInformation", sender: nil)
-                                print("I ran")
+                                if error != nil {
+                                    self.showErrorAlert("Could not create account", message: "Try something else?")
+                                } else {
+                                    // Log In User After Creating Account
+                                    NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID], forKey: KEY_UID)
+                                    DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
+                                        let user = ["provider": authData.provider!, "password": "\(pwd)", "email": "\(email)"]
+                                        DataService.dataService.createFirebaseUser(authData.uid, user: user)
+                                        self.performSegueWithIdentifier("addInformation", sender: nil)
+                                    })
+                                }
                             })
-                        }
-                    })
                         default: break
                     }
                 } else {
@@ -203,6 +187,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
             })
         }
+    }
+    
+    // Create and Display Error Alert
+    func showErrorAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+        alert.addAction(action)
+        presentViewController(alert, animated: true, completion: nil)
     }
     
     // MARK: - Keyboard Management
