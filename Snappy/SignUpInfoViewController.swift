@@ -33,6 +33,7 @@ class SignUpInfoViewController: UIViewController, UIImagePickerControllerDelegat
         
         // Set textField delegate
         usernameField.delegate = self
+        usernameField.clearButtonMode = .Always
         
         // Round selectedImage into circle
         selectedImage.layer.cornerRadius = selectedImage.frame.size.width / 2.0
@@ -131,16 +132,40 @@ class SignUpInfoViewController: UIViewController, UIImagePickerControllerDelegat
         let text = textField.text! as NSString
         let wholeText = text.stringByReplacingCharactersInRange(range, withString: string)
         calculateAndDisplayRemainingCharacters(wholeText)
-        checkTextField()
+        checkTextFieldLength()
+        //checkForInvalidChar()
         return true
     }
     
     // Disable button of textField has more than 20 characters
-    func checkTextField() {
+    func checkTextFieldLength() {
         let buttonStatus = usernameField.text?.characters.count > 20 ? false : true
         finishButton.userInteractionEnabled = buttonStatus
         finishButton.enabled = buttonStatus
     }
+    
+    /* NOT WORKING
+    // Disable textField if invalid characters present
+    func checkForInvalidChar() {
+        let bannedCharacters = [" ", "@", "_", "!", "#", "$", "%", "^", "&", "*", "(", ")", "-", "+", "=", "[", "]", "\\", "|", "'", "\"", "<", ">", "?", "/", ",", ":", ";", "`", "~"]
+        
+        if let text = usernameField.text where text != "" {
+            for char in bannedCharacters {
+                print("starting check")
+                let buttonStatus = text.containsString(char)
+                if buttonStatus {
+                    finishButton.enabled = !buttonStatus
+                    finishButton.userInteractionEnabled = !buttonStatus
+                    characterCountLabel.text = "Please enter valid characters"
+                    view.endEditing(true)
+                    return
+                } else {
+                    finishButton.enabled = true
+                    finishButton.userInteractionEnabled = true
+                }
+            }
+        }
+    } */
 
     // MARK: - ImagePicker Management
     
@@ -162,7 +187,9 @@ class SignUpInfoViewController: UIViewController, UIImagePickerControllerDelegat
 
     // Finished button pressed
     @IBAction func finishedButtonPressed(sender: AnyObject) {
-        
+        let userID = NSUserDefaults.standardUserDefaults().objectForKey(KEY_UID) as! String
+        let userInfo = ["displayName": "\(usernameField.text!)"]
+        DataService.dataService.updateFirebaseUser(userID, user: userInfo)
     }
 
    // MARK: - Keyboard Management
