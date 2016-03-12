@@ -19,6 +19,7 @@ class SignUpInfoViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var characterCountLabel: UILabel!
     @IBOutlet weak var finishButton: UIButton!
+    var animationsPlayed = 0
     
     var imagePicker: UIImagePickerController!
     
@@ -33,16 +34,20 @@ class SignUpInfoViewController: UIViewController, UIImagePickerControllerDelegat
         // Set textField delegate
         usernameField.delegate = self
         
-        // Play animation
-        playAnimationOne()
-        
         // Round selectedImage into circle
         selectedImage.layer.cornerRadius = selectedImage.frame.size.width / 2.0
         selectedImage.clipsToBounds = true
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        // Play animation
+        if animationsPlayed >= 1 {
+            playAnimationTwo()
+        } else {
+            playAnimationOne()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,6 +69,7 @@ class SignUpInfoViewController: UIViewController, UIImagePickerControllerDelegat
         penguinImage.animationDuration = 0.7
         penguinImage.animationRepeatCount = 1
         penguinImage.startAnimating()
+        self.animationsPlayed += 1
         
         let _ = NSTimer.scheduledTimerWithTimeInterval(0.7, target: self, selector: "updateMessageLabel", userInfo: nil, repeats: false)
     }

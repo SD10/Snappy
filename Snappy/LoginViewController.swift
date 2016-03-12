@@ -170,35 +170,36 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             // Account aready exists, then log them in
             DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
                 if error != nil {
-                    print(error)
+                    print(error.code)
                     
-                    //Handle Invalid Email
-                    if error.code == STATUS_EMAIL_INVALID {
-                        self.showErrorAlert("Invalid Email", message: "Please enter a valid email to sign up")
-                    // Account doesn't exist, create account
-                    } else if error.code == STATUS_ACCOUNT_NONEXIST {
-                        DataService.dataService.REF_BASE.createUser(email, password: pwd, withValueCompletionBlock: { error, result in
-                    
-                            if error != nil {
-                                print(error)
-                                self.showErrorAlert("Could not create account", message: "Try something else?")
-                            } else {
-                                // Log In User After Creating Account
-                                NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID], forKey: KEY_UID)
-                                DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
-                                    let user = ["provider": authData.provider!, "password": "\(pwd)", "email": "\(email)"]
-                                    DataService.dataService.createFirebaseUser(authData.uid, user: user)
-                                })
+                    switch error.code {
+                        //Handle Invalid Email
+                        case STATUS_EMAIL_INVALID:
+                            self.showErrorAlert("Invalid Email", message: "Please enter a valid email to sign up")
+                        case STATUS_ACCOUNT_NONEXIST:
+                            DataService.dataService.REF_BASE.createUser(email, password: pwd, withValueCompletionBlock: { error, result in
+                        print("I'm running")
+                        if error != nil {
+                            print(error)
+                            self.showErrorAlert("Could not create account", message: "Try something else?")
+                        } else {
+                            // Log In User After Creating Account
+                            NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID], forKey: KEY_UID)
+                            DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
+                                let user = ["provider": authData.provider!, "password": "\(pwd)", "email": "\(email)"]
+                                DataService.dataService.createFirebaseUser(authData.uid, user: user)
                                 self.performSegueWithIdentifier("addInformation", sender: nil)
-                            }
-                        })
+                                print("I ran")
+                            })
+                        }
+                    })
+                        default: break
                     }
                 } else {
                     // No error so log the user in
                     self.delegate?.didLoginSuccessfully()
                 }
             })
-            
         }
     }
     
