@@ -488,12 +488,26 @@
                                             <constraint firstAttribute="width" constant="260" id="vdl-eu-H0N"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZ1-ZI-gHn">
+                                        <rect key="frame" x="549" y="27" width="43" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="ghT-4Y-yMp"/>
+                                            <constraint firstAttribute="width" constant="43" id="kYS-6E-zwl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                        <state key="normal" title="+"/>
+                                        <connections>
+                                            <action selector="addFriend:" destination="doX-nH-jMC" eventType="touchUpInside" id="3US-EO-00P"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1192831087" green="0.75766798349999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="NdQ-hN-emZ" secondAttribute="bottom" constant="4" id="2tu-7z-j8x"/>
+                                    <constraint firstItem="wZ1-ZI-gHn" firstAttribute="top" secondItem="gJe-x1-Ope" secondAttribute="top" constant="27" id="Dt9-41-vgX"/>
                                     <constraint firstItem="BvG-t9-4gT" firstAttribute="centerX" secondItem="gJe-x1-Ope" secondAttribute="centerX" id="Gjb-zc-zDH"/>
                                     <constraint firstItem="BvG-t9-4gT" firstAttribute="top" secondItem="gJe-x1-Ope" secondAttribute="top" constant="18" id="Syu-YX-RR0"/>
+                                    <constraint firstAttribute="trailing" secondItem="wZ1-ZI-gHn" secondAttribute="trailing" constant="8" id="daU-I5-5xR"/>
                                     <constraint firstItem="NdQ-hN-emZ" firstAttribute="leading" secondItem="gJe-x1-Ope" secondAttribute="leading" constant="8" id="efK-P2-vod"/>
                                     <constraint firstAttribute="height" constant="60" id="j47-rF-RL6"/>
                                     <constraint firstAttribute="height" constant="80" id="lEc-5v-ikk"/>

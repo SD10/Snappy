@@ -94,6 +94,26 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func cameraButtonPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    // Add a friend
+    @IBAction func addFriend(sender: AnyObject) {
+        let alert = UIAlertController(title: "Add a Friend", message: "Who do you want to add?", preferredStyle: .Alert)
+        alert.addTextFieldWithConfigurationHandler { (textField: UITextField) -> Void in
+            textField.placeholder = "Enter a username..."
+            
+        }
+        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: {(paramAction: UIAlertAction) -> Void in
+            if let textFields = alert.textFields {
+                let theTextFields = textFields as [UITextField]
+                let userName = theTextFields[0].text
+                DataService.dataService.addFirebaseFriend(["\(userName!)": true])
+            }
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
+
+    }
 
     /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
