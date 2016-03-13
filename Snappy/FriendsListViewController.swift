@@ -13,10 +13,10 @@ import Firebase
 class FriendsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var testUsers = [User]()
+    var isDeleteEnabled = true
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
     // Set tableview delegate and datasource
     tableView.delegate = self
@@ -58,6 +58,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     
     // Add data to TableView Cell
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         if let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as? UserCell {
             
             let user = testUsers[indexPath.row]
@@ -74,6 +75,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
             return UITableViewCell()
         }
     }
+    
     
     // Allow rows to be deleted by dragging left
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {

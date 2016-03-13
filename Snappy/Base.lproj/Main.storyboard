@@ -460,6 +460,7 @@
                                                 <constraint firstItem="YHv-7K-5lo" firstAttribute="centerY" secondItem="aJu-Ya-Q4P" secondAttribute="centerY" id="oTT-Us-ZwX"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
                                         <connections>
                                             <outlet property="userImage" destination="aJu-Ya-Q4P" id="XHm-fM-wOn"/>
                                             <outlet property="username" destination="YHv-7K-5lo" id="g7a-iF-5Ch"/>
