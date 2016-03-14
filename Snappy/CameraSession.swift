@@ -48,8 +48,6 @@ class CameraSession {
     
     // captures and returns a UIImage //
     func captureImage() -> UIImage? {
-        var image: UIImage? = nil
-        
         let videoConnection = stillImageOutput.connectionWithMediaType(AVMediaTypeVideo)
         stillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection) {
             (let buffer, let error) in
@@ -57,12 +55,9 @@ class CameraSession {
                 print("Error occured when capturing image: \(error)")
             } else {
                 let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
-                image = UIImage(data: imageData)
-                print("Image capture successful!")
+                let image = UIImage(data: imageData)
             }
         }
-        
-        return image
     }
     
     // updates the camera session device, and swaps capture session input //
