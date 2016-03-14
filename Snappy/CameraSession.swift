@@ -71,7 +71,6 @@ class CameraSession {
         captureSession.removeInput(device.input)
         captureSession.addInput(newDevice.input)
         captureSession.commitConfiguration()
-        
         self.device = newDevice
     }
 }
@@ -84,13 +83,13 @@ struct CameraDevice {
 
     init(position: AVCaptureDevicePosition) {
         self.position = position
+        self.device = nil
         
+        // finds available device of proper position //
         let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo) as! [AVCaptureDevice]
         for device in devices {
-            switch position {
-            case .Front: self.device = device
-            case .Back: self.device = device
-            default: self.device = nil
+            if device.position == position {
+                self.device = device
             }
         }
         

@@ -16,7 +16,7 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
     @IBOutlet var previewView: UIView!
     
     var cameraSession: CameraSession!
-    var capturedImage: UIImage!
+    var capturedImage: UIImage?
     var imageView: UIImageView!
     
     @IBOutlet weak var captureButton: UIButton!
@@ -41,7 +41,7 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
         
         imageView = UIImageView()
         imageView.bounds = previewView.bounds
-        previewView.insertSubview(imageView, atIndex: 0)
+        previewView.addSubview(imageView)
         
         cameraSession.previewLayer.frame = previewView.bounds
         previewView.layer.insertSublayer(cameraSession.previewLayer, atIndex: 0)
@@ -83,8 +83,12 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
     
     @IBAction func didPressCapturePhoto(sender: AnyObject) {
         capturedImage = cameraSession.captureImage()
-        imageView.image = capturedImage
-        cameraSession.previewLayer.hidden = true
+        if capturedImage != nil {
+            print("Image capture successful! :D :D :D")
+            imageView.image = capturedImage
+            imageView.hidden = false
+            cameraSession.previewLayer.hidden = true
+        }
     }
     
     
