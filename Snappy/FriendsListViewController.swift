@@ -12,7 +12,7 @@ import Firebase
 
 class FriendsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var testUsers = [User]()
+    var friendList = [User]()
     var isDeleteEnabled = true
     @IBOutlet weak var tableView: UITableView!
     
@@ -22,13 +22,35 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     tableView.delegate = self
     tableView.dataSource = self
         
-        // Retrieve data from Firebase
+        /* Retrieve users friends
+        DataService.dataService.REF_USER.childByAppendingPath("friends").observeEventType(.Value, withBlock: { snapshot in
+            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+                self.friendList.removeAll()
+                var usersToUpdate = [User]()
+                for snap in snapshots {
+                    DataService.dataService.REF_USERS.childByAppendingPath(snap.key).observeEventType(.Value, withBlock: { snapshotUser in
+                        if let userDict = snapshotUser.value as? [String: AnyObject] {
+                            let key = snapshotUser.key
+                            let user = User(userID: key, dictionary: userDict)
+                            usersToUpdate.append(user)
+                            usersToUpdate.removeAtIndex(0)
+                        }
+                        self.friendList += usersToUpdate
+                        self.tableView.reloadData()
+                    })
+                    
+                }
+                
+            }
+        }) */
+
+        /* Retrieve data from Firebase
         DataService.dataService.REF_USERS.observeEventType(.Value, withBlock: { snapshot in
             
             if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
                 self.testUsers.removeAll()
                 for snap in snapshots {
-                    print("SNAP: \(snap)")
+                    //print("SNAP: \(snap)")
                     
                     if let userDict = snap.value as? [String: AnyObject] {
                         let key = snap.key
@@ -39,7 +61,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
             }
             
             self.tableView.reloadData()
-        })
+        })*/
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,7 +75,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     
     // Number of rows in tableView
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testUsers.count
+        return friendList.count
     }
     
     // Add data to TableView Cell
@@ -61,7 +83,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
         
         if let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as? UserCell {
             
-            let user = testUsers[indexPath.row]
+            let user = friendList[indexPath.row]
             
             // If displayName exists use that for label, if not use email
             if let username = user.displayName {
@@ -80,7 +102,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     // Allow rows to be deleted by dragging left
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            testUsers.removeAtIndex(indexPath.row)
+            friendList.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
@@ -110,8 +132,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
                 let userEmail = theTextFields[0].text
                 DataService.dataService.REF_USERS.queryOrderedByChild("email").queryEqualToValue(userEmail).observeEventType(.ChildAdded, withBlock: { snapshot in
                     print(snapshot.key)
-                    let uID = NSUserDefaults.standardUserDefaults().objectForKey(KEY_UID) as? String
-                    DataService.dataService.addFirebaseFriend(uID!, friend: ["\(snapshot.key)": true])
+                    DataService.dataService.addFirebaseFriend(["\(snapshot.key)": true])
                 })
             }
             
