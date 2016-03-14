@@ -101,14 +101,18 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     @IBAction func addFriend(sender: AnyObject) {
         let alert = UIAlertController(title: "Add a Friend", message: "Who do you want to add?", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler { (textField: UITextField) -> Void in
-            textField.placeholder = "Enter a username..."
+            textField.placeholder = "Enter a user's email..."
             
         }
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: {(paramAction: UIAlertAction) -> Void in
             if let textFields = alert.textFields {
                 let theTextFields = textFields as [UITextField]
-                let userName = theTextFields[0].text
-                DataService.dataService.addFirebaseFriend(["\(userName!)": true])
+                let userEmail = theTextFields[0].text
+                DataService.dataService.REF_USERS.queryOrderedByChild("email").queryEqualToValue(userEmail).observeEventType(.ChildAdded, withBlock: { snapshot in
+                    print(snapshot.key)
+                    let uID = NSUserDefaults.standardUserDefaults().objectForKey(KEY_UID) as? String
+                    DataService.dataService.addFirebaseFriend(uID!, friend: ["\(snapshot.key)": true])
+                })
             }
             
         }))

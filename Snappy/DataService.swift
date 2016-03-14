@@ -18,7 +18,6 @@ class DataService {
     private var _REF_USERS = Firebase(url:"\(URL_BASE)/users")
     private var _REF_USER = Firebase(url:"\(URL_BASE)/users/")
     private var _REF_MSGS = Firebase(url: "\(URL_BASE)/messages")
-    private var _REF_FRIENDS = Firebase(url:"\(URL_BASE)/users/\(uID!)/friends")
     
     var REF_BASE: Firebase {
         return _REF_BASE
@@ -36,9 +35,6 @@ class DataService {
         return _REF_USER
     }
     
-    var REF_FRIENDS: Firebase {
-        return _REF_FRIENDS
-    }
     
     func createFirebaseUser(uid: String, user: [String: AnyObject]) {
         REF_USERS.childByAppendingPath(uid).setValue(user)
@@ -48,7 +44,7 @@ class DataService {
         REF_USER.childByAppendingPath(uid).updateChildValues(user)
     }
     
-    func addFirebaseFriend(friend: [String: Bool]) {
-        REF_FRIENDS.updateChildValues(friend)
+    func addFirebaseFriend(uid: String, friend: [String: Bool]) {
+        REF_USER.childByAppendingPath(uid + "/friends").updateChildValues(friend)
     }
 }
