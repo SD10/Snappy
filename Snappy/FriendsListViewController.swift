@@ -22,7 +22,13 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     tableView.delegate = self
     tableView.dataSource = self
         
-        //Retrieve users friends
+        //Attempt 3
+        DataService.dataService.REF_USER.childByAppendingPath("friends").observeEventType(.Value, withBlock: { snapshot in
+            print(snapshot)
+        })
+        
+        
+        /*Retrieve users friends
         DataService.dataService.REF_USER.childByAppendingPath("friends").observeEventType(.Value, withBlock: { snapshot in
             if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
                 self.friendList.removeAll()
@@ -41,7 +47,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
                 }
                 
             }
-        })
+        })*/
 
         /* Retrieve data from Firebase
         DataService.dataService.REF_USERS.observeEventType(.Value, withBlock: { snapshot in

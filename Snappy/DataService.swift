@@ -16,7 +16,7 @@ class DataService {
     static let dataService = DataService()
     private var _REF_BASE = Firebase(url: "\(URL_BASE)")
     private var _REF_USERS = Firebase(url:"\(URL_BASE)/users")
-    private var _REF_USER = Firebase(url:"\(URL_BASE)/users/\(uID!)")
+    private var _REF_USER = Firebase(url:"\(URL_BASE)/users/\(uID)")
     private var _REF_MSGS = Firebase(url: "\(URL_BASE)/messages")
     
     var REF_BASE: Firebase {
