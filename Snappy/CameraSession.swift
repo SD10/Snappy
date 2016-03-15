@@ -46,8 +46,9 @@ class CameraSession {
         }
     }
     
-    // captures and returns a UIImage //
-    func captureImage() -> UIImage? {
+    // captures a UIImage //
+    func captureImage(completion: ((UIImage?) -> ()) ) {
+        
         let videoConnection = stillImageOutput.connectionWithMediaType(AVMediaTypeVideo)
         stillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection) {
             (let buffer, let error) in
@@ -56,6 +57,8 @@ class CameraSession {
             } else {
                 let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
                 let image = UIImage(data: imageData)
+                completion(image)
+                print("Image captured successfully!")
             }
         }
     }

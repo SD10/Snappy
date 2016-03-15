@@ -41,7 +41,9 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
         
         imageView = UIImageView()
         imageView.bounds = previewView.bounds
-        previewView.addSubview(imageView)
+        imageView.center = previewView.center
+        previewView.insertSubview(imageView, atIndex: 0)
+        hideEditInterface(true)
         
         cameraSession.previewLayer.frame = previewView.bounds
         previewView.layer.insertSublayer(cameraSession.previewLayer, atIndex: 0)
@@ -77,18 +79,31 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
     }
     
     @IBAction func didPressCancelEdit(sender: UIButton) {
- 
+        hideCaptureInterface(false)
+        hideEditInterface(true)
     }
 
     
     @IBAction func didPressCapturePhoto(sender: AnyObject) {
-        capturedImage = cameraSession.captureImage()
-        if capturedImage != nil {
-            print("Image capture successful! :D :D :D")
-            imageView.image = capturedImage
-            imageView.hidden = false
-            cameraSession.previewLayer.hidden = true
-        }
+        cameraSession.captureImage( {
+                (let image) in
+            self.imageView.image = image
+            self.hideCaptureInterface(true)
+            self.hideEditInterface(false)
+            } )
+    }
+    
+    func hideCaptureInterface(hidden: Bool) {
+        captureButton.hidden = hidden
+        inboxButton.hidden = hidden
+        friendsListButton.hidden = hidden
+        flipButton.hidden = hidden
+        cameraSession.previewLayer.hidden = hidden
+    }
+    
+    func hideEditInterface(hidden: Bool) {
+        cancelButton.hidden = hidden
+        imageView.hidden = hidden
     }
     
     
