@@ -183,6 +183,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                                     self.showErrorAlert("Could not create account", message: "Try something else?")
                                 } else {
                                     // Log In User After Creating Account
+                                    self.signupButton.enabled = false
                                     NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID], forKey: KEY_UID)
                                     DataService.dataService.REF_USERS.authUser(email, password: pwd, withCompletionBlock: { error, authData in
                                         let user = ["provider": authData.provider!, "password": "\(pwd)", "email": "\(email)"]
