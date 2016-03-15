@@ -127,7 +127,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
                 print("Successfully logged in with facebook. \(accessToken)")
                 
-                DataService.dataService.REF_BASE.authWithOAuthProvider("facebook", token: accessToken, withCompletionBlock: { error, authData in
+                DataService.dataService.REF_USERS.authWithOAuthProvider("facebook", token: accessToken, withCompletionBlock: { error, authData in
                     if error != nil {
                         print("Login failed. \(error)")
                     } else {
@@ -147,7 +147,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // Email-Password Login Attempt
     @IBAction func attemptLogin(sender: UIButton) {
         if let email = emailTextField.text where email != "", let pwd = passwordTextField.text where pwd != "" {
-            DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
+            DataService.dataService.REF_USERS.authUser(email, password: pwd, withCompletionBlock: { error, authData in
                 if error != nil {
                     switch error.code {
                         case STATUS_EMAIL_INVALID:
@@ -171,20 +171,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if let email = emailTextField.text where email != "", let pwd = passwordTextField.text where pwd != "" {
             
             // Account aready exists, then log them in
-            DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
+            DataService.dataService.REF_USERS.authUser(email, password: pwd, withCompletionBlock: { error, authData in
                 if error != nil {
                     switch error.code {
                         //Handle Invalid Email
                         case STATUS_EMAIL_INVALID:
                             self.showErrorAlert("Invalid Email", message: "Please enter a valid email to sign up")
                         case STATUS_ACCOUNT_NONEXIST:
-                            DataService.dataService.REF_BASE.createUser(email, password: pwd, withValueCompletionBlock: { error, result in
+                            DataService.dataService.REF_USERS.createUser(email, password: pwd, withValueCompletionBlock: { error, result in
                                 if error != nil {
                                     self.showErrorAlert("Could not create account", message: "Try something else?")
                                 } else {
                                     // Log In User After Creating Account
                                     NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID], forKey: KEY_UID)
-                                    DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
+                                    DataService.dataService.REF_USERS.authUser(email, password: pwd, withCompletionBlock: { error, authData in
                                         let user = ["provider": authData.provider!, "password": "\(pwd)", "email": "\(email)"]
                                         DataService.dataService.createFirebaseUser(authData.uid, user: user)
                                         self.performSegueWithIdentifier("addInformation", sender: nil)

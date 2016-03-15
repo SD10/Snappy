@@ -13,7 +13,7 @@ import Firebase
 class FriendsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var friendList = [User]()
-    var isDeleteEnabled = true
+    var friendsIDs = [String]()
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -22,51 +22,29 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     tableView.delegate = self
     tableView.dataSource = self
         
-        //Attempt 3
-        DataService.dataService.REF_USER.childByAppendingPath("friends").observeEventType(.Value, withBlock: { snapshot in
-            print(snapshot)
-        })
-        
-        
-        /*Retrieve users friends
-        DataService.dataService.REF_USER.childByAppendingPath("friends").observeEventType(.Value, withBlock: { snapshot in
-            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+        //Get users friends
+        let uID = NSUserDefaults.standardUserDefaults().objectForKey(KEY_UID) as! String
+        DataService.dataService.REF_USERS.childByAppendingPath("\(uID)/friends").observeEventType(.Value, withBlock: { friends in
+            if let retrievedFriends = friends.children.allObjects as? [FDataSnapshot] {
+                self.friendsIDs.removeAll()
                 self.friendList.removeAll()
-                var usersToUpdate = [User]()
-                for snap in snapshots {
-                    DataService.dataService.REF_USERS.childByAppendingPath(snap.key).observeEventType(.Value, withBlock: { snapshotUser in
-                        if let userDict = snapshotUser.value as? [String: AnyObject] {
-                            let key = snapshotUser.key
-                            let user = User(userID: key, dictionary: userDict)
-                            usersToUpdate.append(user)
-                        }
-                        self.friendList += usersToUpdate
-                        self.tableView.reloadData()
-                    })
-                    
+                for friend in retrievedFriends {
+                    self.friendsIDs.append(friend.key)
                 }
                 
-            }
-        })*/
-
-        /* Retrieve data from Firebase
-        DataService.dataService.REF_USERS.observeEventType(.Value, withBlock: { snapshot in
-            
-            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                self.testUsers.removeAll()
-                for snap in snapshots {
-                    //print("SNAP: \(snap)")
-                    
-                    if let userDict = snap.value as? [String: AnyObject] {
-                        let key = snap.key
-                        let user = User(userID: key, dictionary: userDict)
-                        self.testUsers.append(user)
-                    }
+                for uID in self.friendsIDs {
+                    DataService.dataService.REF_USERS.childByAppendingPath(uID).observeEventType(.Value, withBlock: { snapshot in
+                        if let userDict = snapshot.value as? [String: AnyObject] {
+                            let key = snapshot.key
+                            let user = User(userID: key, dictionary: userDict)
+                            self.friendList.append(user)
+                            self.tableView.reloadData()
+                        }
+                    })
                 }
             }
-            
-            self.tableView.reloadData()
-        })*/
+        })
+   
     }
 
     override func didReceiveMemoryWarning() {
@@ -136,8 +114,8 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
                 let theTextFields = textFields as [UITextField]
                 let userEmail = theTextFields[0].text
                 DataService.dataService.REF_USERS.queryOrderedByChild("email").queryEqualToValue(userEmail).observeEventType(.ChildAdded, withBlock: { snapshot in
-                    print(snapshot.key)
-                    DataService.dataService.addFirebaseFriend(["\(snapshot.key)": true])
+                    let uID = NSUserDefaults.standardUserDefaults().objectForKey(KEY_UID) as? String
+                    DataService.dataService.addFirebaseFriend(uID!, friend: ["\(snapshot.key)": true])
                 })
             }
             
