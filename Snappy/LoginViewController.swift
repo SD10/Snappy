@@ -9,6 +9,7 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import AVFoundation
 
 protocol LoginViewControllerDelegate {
     func didLoginSuccessfully()
@@ -24,11 +25,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var facebookButton: UIButton!
     var delegate: LoginViewControllerDelegate?
+    var player = AVAudioPlayer()
     
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Prepare Camera Sound Effect
+        let audioPath = NSBundle.mainBundle().pathForResource("cameraShutter", ofType: "wav")!
+        
+        do {
+            try player = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: audioPath))
+        } catch let error as NSError {
+            print(error.debugDescription)
+        }
         
         //Set UITextField Delegates
         emailTextField.delegate = self
@@ -93,6 +104,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         UIView.animateWithDuration(1.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             aView.alpha = 0.0
+            self.player.play()
             self.loginBackground.alpha = 0.72
 
             }, completion: { (done) -> Void in

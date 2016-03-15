@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A65039123BBFBA4F9E00384D /* Pods_Snappy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3699F9DE6920943B3495D1 /* Pods_Snappy.framework */; };
+		B04A263F1C978C2000325EFA /* cameraShutter.wav in Resources */ = {isa = PBXBuildFile; fileRef = B04A263E1C978C2000325EFA /* cameraShutter.wav */; };
 		B081F9A51C90B02D00F18D22 /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B081F9A41C90B02D00F18D22 /* FriendsListViewController.swift */; };
 		B081F9E71C92533C00F18D22 /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B081F9E61C92533C00F18D22 /* LoginTextField.swift */; };
 		B081F9E91C92602500F18D22 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B081F9E81C92602500F18D22 /* UserCell.swift */; };
@@ -33,6 +34,7 @@
 		1405CAD56D9DF58692D284EB /* Pods-Snappy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snappy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snappy/Pods-Snappy.release.xcconfig"; sourceTree = "<group>"; };
 		7B3699F9DE6920943B3495D1 /* Pods_Snappy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snappy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99488A50A0C544A750161BA4 /* Pods-Snappy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snappy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snappy/Pods-Snappy.debug.xcconfig"; sourceTree = "<group>"; };
+		B04A263E1C978C2000325EFA /* cameraShutter.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cameraShutter.wav; sourceTree = "<group>"; };
 		B081F9A41C90B02D00F18D22 /* FriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
 		B081F9E61C92533C00F18D22 /* LoginTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		B081F9E81C92602500F18D22 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				B08510E41C8F3657003C7570 /* NotoSans-BoldItalic.ttf */,
 				B08510E51C8F3657003C7570 /* NotoSans-Italic.ttf */,
 				B08510E61C8F3657003C7570 /* NotoSans-Regular.ttf */,
+				B04A263E1C978C2000325EFA /* cameraShutter.wav */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0DFC1701C7E8596003882C1 /* LaunchScreen.storyboard in Resources */,
+				B04A263F1C978C2000325EFA /* cameraShutter.wav in Resources */,
 				B0DFC16D1C7E8596003882C1 /* Assets.xcassets in Resources */,
 				B0DFC1681C7E8596003882C1 /* Main.storyboard in Resources */,
 			);

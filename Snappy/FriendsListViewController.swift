@@ -22,7 +22,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     tableView.delegate = self
     tableView.dataSource = self
         
-        /* Retrieve users friends
+        //Retrieve users friends
         DataService.dataService.REF_USER.childByAppendingPath("friends").observeEventType(.Value, withBlock: { snapshot in
             if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
                 self.friendList.removeAll()
@@ -33,7 +33,6 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
                             let key = snapshotUser.key
                             let user = User(userID: key, dictionary: userDict)
                             usersToUpdate.append(user)
-                            usersToUpdate.removeAtIndex(0)
                         }
                         self.friendList += usersToUpdate
                         self.tableView.reloadData()
@@ -42,7 +41,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
                 }
                 
             }
-        }) */
+        })
 
         /* Retrieve data from Firebase
         DataService.dataService.REF_USERS.observeEventType(.Value, withBlock: { snapshot in
@@ -111,7 +110,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Friends"
     }
-
+    
     // MARK: - Navigation
     
     // Go back to Camera
