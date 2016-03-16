@@ -81,15 +81,6 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    
-    // Allow rows to be deleted by dragging left
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            friendList.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        }
-    }
-    
     // Give the section a header of "Friends"
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Friends"
