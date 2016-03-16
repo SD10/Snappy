@@ -107,6 +107,7 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
                 DataService.dataService.REF_USERS.queryOrderedByChild("email").queryEqualToValue(userEmail).observeEventType(.ChildAdded, withBlock: { snapshot in
                     let uID = NSUserDefaults.standardUserDefaults().objectForKey(KEY_UID) as? String
                     DataService.dataService.addFirebaseFriend(uID!, friend: ["\(snapshot.key)": true])
+                    DataService.dataService.addFirebaseFriend("\(snapshot.key)", friend: [uID!: true])
                 })
             }
             
