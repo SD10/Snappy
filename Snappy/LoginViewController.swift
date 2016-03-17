@@ -166,6 +166,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
     // Sign Up for New Account
     @IBAction func attemptSignUp(sender: UIButton) {
         if let email = emailTextField.text where email != "", let pwd = passwordTextField.text where pwd != "" {
