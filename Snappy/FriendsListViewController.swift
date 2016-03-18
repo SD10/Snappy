@@ -81,6 +81,11 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    //Did select a tableView row
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
     // Give the section a header of "Friends"
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Friends"

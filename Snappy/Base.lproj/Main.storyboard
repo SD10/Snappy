@@ -464,6 +464,7 @@
                                         <connections>
                                             <outlet property="userImage" destination="aJu-Ya-Q4P" id="XHm-fM-wOn"/>
                                             <outlet property="username" destination="YHv-7K-5lo" id="g7a-iF-5Ch"/>
+                                            <segue destination="sTB-zj-soc" kind="presentation" identifier="sendMessage" id="4q9-lc-87X"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -544,6 +545,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2mM-1R-1ao" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-790" y="1200"/>
+        </scene>
+        <!--Message View Controller-->
+        <scene sceneID="MJq-oC-pUe">
+            <objects>
+                <viewController id="sTB-zj-soc" customClass="MessageViewController" customModule="Snappy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fIV-Nc-eRm"/>
+                        <viewControllerLayoutGuide type="bottom" id="Km5-bB-xu4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pi1-d0-wIs">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hJR-rV-ws4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-790" y="2044"/>
         </scene>
         <!--Inbox View Controller-->
         <scene sceneID="Ea7-8s-Q5f">
