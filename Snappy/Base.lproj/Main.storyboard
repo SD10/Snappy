@@ -18,6 +18,7 @@
             <string>NotoSans</string>
             <string>NotoSans</string>
             <string>NotoSans</string>
+            <string>NotoSans</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -557,8 +558,48 @@
                     <view key="view" contentMode="scaleToFill" id="pi1-d0-wIs">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmX-rZ-iZU">
+                                <rect key="frame" x="0.0" y="540" width="600" height="60"/>
+                                <color key="backgroundColor" red="0.23921568630000001" green="0.70196078429999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="6YI-Wc-M3d"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="18"/>
+                                <state key="normal" title="Send Message">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendMessageButton:" destination="sTB-zj-soc" eventType="touchUpInside" id="PZ5-wG-aEq"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagesplaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="do6-TM-aWn">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a message to send" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oru-Ox-ytB">
+                                <rect key="frame" x="0.0" y="510" width="600" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Km5-bB-xu4" firstAttribute="top" secondItem="pmX-rZ-iZU" secondAttribute="bottom" id="Lpj-8i-fPa"/>
+                            <constraint firstAttribute="trailing" secondItem="pmX-rZ-iZU" secondAttribute="trailing" id="Mna-6H-Kne"/>
+                            <constraint firstItem="pmX-rZ-iZU" firstAttribute="leading" secondItem="pi1-d0-wIs" secondAttribute="leading" id="Rwe-Jo-VaP"/>
+                            <constraint firstAttribute="trailing" secondItem="oru-Ox-ytB" secondAttribute="trailing" id="TFZ-6Y-PTY"/>
+                            <constraint firstItem="do6-TM-aWn" firstAttribute="top" secondItem="pi1-d0-wIs" secondAttribute="top" id="Wac-hm-R1b"/>
+                            <constraint firstItem="pmX-rZ-iZU" firstAttribute="top" secondItem="do6-TM-aWn" secondAttribute="bottom" id="YeB-yS-ner"/>
+                            <constraint firstItem="oru-Ox-ytB" firstAttribute="leading" secondItem="pi1-d0-wIs" secondAttribute="leading" id="ZHm-vS-Zfm"/>
+                            <constraint firstItem="do6-TM-aWn" firstAttribute="leading" secondItem="pi1-d0-wIs" secondAttribute="leading" id="cpf-Hd-U9h"/>
+                            <constraint firstItem="oru-Ox-ytB" firstAttribute="centerX" secondItem="pi1-d0-wIs" secondAttribute="centerX" id="d7y-Do-vYf"/>
+                            <constraint firstItem="pmX-rZ-iZU" firstAttribute="top" secondItem="oru-Ox-ytB" secondAttribute="bottom" id="qml-lK-yzb"/>
+                            <constraint firstAttribute="trailing" secondItem="do6-TM-aWn" secondAttribute="trailing" id="zWx-ur-uCp"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="inputTextField" destination="oru-Ox-ytB" id="LSS-0q-0MC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hJR-rV-ws4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

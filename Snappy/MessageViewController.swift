@@ -10,26 +10,38 @@ import UIKit
 
 class MessageViewController: UIViewController {
 
+    var receiver: User?
+    @IBOutlet weak var inputTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleKeyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func handleKeyboardDidShow(notification: NSNotification) {
+        // Get the frame of the keyboard
+        let keyboardRectAsObject = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        // Place it in a CGRect
+        var keyboardRect = CGRectZero
+        keyboardRectAsObject.getValue(&keyboardRect)
+        //Give a bottom margin to our text field that makes it reach to the top of the keyboard
+        inputTextField.center.x = view.center.x
+        inputTextField.frame.size = CGSize(width: view.frame.size.width, height: 30.0)
+        inputTextField.center.y = keyboardRect.height + 138
     }
-    */
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+
+    @IBAction func sendMessageButton(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+
 
 }
