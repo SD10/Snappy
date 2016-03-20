@@ -2,7 +2,7 @@
 //  MasterViewController.swift
 //  Snappy
 //
-//  This is the main view controller, it displays the camera user interface.
+//  This is the main view controller, it displays the camera user-interface.
 //
 //  Created by Steven on 2/24/16.
 //  Copyright © 2016 SwiftSyndicate. All rights reserved.

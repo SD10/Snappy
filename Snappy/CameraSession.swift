@@ -27,12 +27,16 @@ class CameraSession {
         // captureSession //
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = AVCaptureSessionPresetPhoto
-        captureSession.addInput(device.input)
+        if captureSession.canAddInput(device.input) {
+            captureSession.addInput(device.input)
+        }
         
         // stillImageOutput //
         stillImageOutput = AVCaptureStillImageOutput()
         stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
-        captureSession.addOutput(stillImageOutput)
+        if captureSession.canAddOutput(stillImageOutput) {
+            captureSession.addOutput(stillImageOutput)
+        }
         
         // previewLayer //
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
@@ -65,11 +69,13 @@ class CameraSession {
     
     // updates the camera session device, and swaps capture session input //
     func updateCameraDevice(to newDevice: CameraDevice) {
-        captureSession.beginConfiguration()
-        captureSession.removeInput(device.input)
-        captureSession.addInput(newDevice.input)
-        captureSession.commitConfiguration()
-        self.device = newDevice
+        if captureSession.canAddInput(newDevice.input) {
+            captureSession.beginConfiguration()
+            captureSession.removeInput(device.input)
+            captureSession.addInput(newDevice.input)
+            captureSession.commitConfiguration()
+            self.device = newDevice
+        }
     }
 }
 
