@@ -9,6 +9,7 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import AVFoundation
 
 protocol LoginViewControllerDelegate {
     func didLoginSuccessfully()
@@ -24,11 +25,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var facebookButton: UIButton!
     var delegate: LoginViewControllerDelegate?
+    var player = AVAudioPlayer()
     
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Prepare Camera Sound Effect
+        let audioPath = NSBundle.mainBundle().pathForResource("cameraShutter", ofType: "wav")!
+        
+        do {
+            try player = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: audioPath))
+        } catch let error as NSError {
+            print(error.debugDescription)
+        }
         
         //Set UITextField Delegates
         emailTextField.delegate = self
@@ -93,6 +104,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         UIView.animateWithDuration(1.5, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             aView.alpha = 0.0
+            self.player.play()
             self.loginBackground.alpha = 0.72
 
             }, completion: { (done) -> Void in
@@ -115,7 +127,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
                 print("Successfully logged in with facebook. \(accessToken)")
                 
-                DataService.dataService.REF_BASE.authWithOAuthProvider("facebook", token: accessToken, withCompletionBlock: { error, authData in
+                DataService.dataService.REF_USERS.authWithOAuthProvider("facebook", token: accessToken, withCompletionBlock: { error, authData in
                     if error != nil {
                         print("Login failed. \(error)")
                     } else {
@@ -135,7 +147,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // Email-Password Login Attempt
     @IBAction func attemptLogin(sender: UIButton) {
         if let email = emailTextField.text where email != "", let pwd = passwordTextField.text where pwd != "" {
-            DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
+            DataService.dataService.REF_USERS.authUser(email, password: pwd, withCompletionBlock: { error, authData in
                 if error != nil {
                     switch error.code {
                         case STATUS_EMAIL_INVALID:
@@ -154,25 +166,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
     // Sign Up for New Account
     @IBAction func attemptSignUp(sender: UIButton) {
         if let email = emailTextField.text where email != "", let pwd = passwordTextField.text where pwd != "" {
             
             // Account aready exists, then log them in
-            DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
+            DataService.dataService.REF_USERS.authUser(email, password: pwd, withCompletionBlock: { error, authData in
                 if error != nil {
                     switch error.code {
                         //Handle Invalid Email
                         case STATUS_EMAIL_INVALID:
                             self.showErrorAlert("Invalid Email", message: "Please enter a valid email to sign up")
                         case STATUS_ACCOUNT_NONEXIST:
-                            DataService.dataService.REF_BASE.createUser(email, password: pwd, withValueCompletionBlock: { error, result in
+                            DataService.dataService.REF_USERS.createUser(email, password: pwd, withValueCompletionBlock: { error, result in
                                 if error != nil {
                                     self.showErrorAlert("Could not create account", message: "Try something else?")
                                 } else {
                                     // Log In User After Creating Account
+                                    self.signupButton.enabled = false
                                     NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID], forKey: KEY_UID)
-                                    DataService.dataService.REF_BASE.authUser(email, password: pwd, withCompletionBlock: { error, authData in
+                                    DataService.dataService.REF_USERS.authUser(email, password: pwd, withCompletionBlock: { error, authData in
                                         let user = ["provider": authData.provider!, "password": "\(pwd)", "email": "\(email)"]
                                         DataService.dataService.createFirebaseUser(authData.uid, user: user)
                                         self.performSegueWithIdentifier("addInformation", sender: nil)

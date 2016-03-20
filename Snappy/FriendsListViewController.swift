@@ -12,34 +12,39 @@ import Firebase
 
 class FriendsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var testUsers = [User]()
+    var friendList = [User]()
+    var friendsIDs = [String]()
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
     // Set tableview delegate and datasource
     tableView.delegate = self
     tableView.dataSource = self
         
-        // Retrieve data from Firebase
-        DataService.dataService.REF_USERS.observeEventType(.Value, withBlock: { snapshot in
-            
-            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                self.testUsers.removeAll()
-                for snap in snapshots {
-                    print("SNAP: \(snap)")
-                    
-                    if let userDict = snap.value as? [String: AnyObject] {
-                        let key = snap.key
-                        let user = User(userID: key, dictionary: userDict)
-                        self.testUsers.append(user)
-                    }
+        //Get users friends
+        let uID = NSUserDefaults.standardUserDefaults().objectForKey(KEY_UID) as! String
+        DataService.dataService.REF_USERS.childByAppendingPath("\(uID)/friends").observeEventType(.Value, withBlock: { friends in
+            if let retrievedFriends = friends.children.allObjects as? [FDataSnapshot] {
+                self.friendsIDs.removeAll()
+                self.friendList.removeAll()
+                for friend in retrievedFriends {
+                    self.friendsIDs.append(friend.key)
+                }
+                
+                for uID in self.friendsIDs {
+                    DataService.dataService.REF_USERS.childByAppendingPath(uID).observeEventType(.Value, withBlock: { snapshot in
+                        if let userDict = snapshot.value as? [String: AnyObject] {
+                            let key = snapshot.key
+                            let user = User(userID: key, dictionary: userDict)
+                            self.friendList.append(user)
+                            self.tableView.reloadData()
+                        }
+                    })
                 }
             }
-            
-            self.tableView.reloadData()
         })
+   
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,14 +58,15 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
     
     // Number of rows in tableView
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testUsers.count
+        return friendList.count
     }
     
     // Add data to TableView Cell
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         if let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as? UserCell {
             
-            let user = testUsers[indexPath.row]
+            let user = friendList[indexPath.row]
             
             // If displayName exists use that for label, if not use email
             if let username = user.displayName {
@@ -75,24 +81,40 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    // Allow rows to be deleted by dragging left
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            testUsers.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        }
-    }
-    
     // Give the section a header of "Friends"
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Friends"
     }
-
+    
     // MARK: - Navigation
     
     // Go back to Camera
     @IBAction func cameraButtonPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // Add a friend
+    @IBAction func addFriend(sender: AnyObject) {
+        let alert = UIAlertController(title: "Add a Friend", message: "Who do you want to add?", preferredStyle: .Alert)
+        alert.addTextFieldWithConfigurationHandler { (textField: UITextField) -> Void in
+            textField.placeholder = "Enter a user's email..."
+            
+        }
+        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: {(paramAction: UIAlertAction) -> Void in
+            if let textFields = alert.textFields {
+                let theTextFields = textFields as [UITextField]
+                let userEmail = theTextFields[0].text
+                DataService.dataService.REF_USERS.queryOrderedByChild("email").queryEqualToValue(userEmail).observeEventType(.ChildAdded, withBlock: { snapshot in
+                    let uID = NSUserDefaults.standardUserDefaults().objectForKey(KEY_UID) as? String
+                    DataService.dataService.addFirebaseFriend(uID!, friend: ["\(snapshot.key)": true])
+                    DataService.dataService.addFirebaseFriend("\(snapshot.key)", friend: [uID!: true])
+                })
+            }
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
+
     }
 
     /*

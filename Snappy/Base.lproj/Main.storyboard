@@ -91,7 +91,7 @@
                                 </variation>
                                 <connections>
                                     <action selector="finishedButtonPressed:" destination="w5k-hj-3XU" eventType="touchUpInside" id="vhx-Ir-ckn"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="dEd-pD-Rn8"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="Hwu-VH-F5h"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a username..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EBS-nx-bmU">
@@ -223,7 +223,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kVC-m4-cMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="580" y="668"/>
+            <point key="canvasLocation" x="580" y="682"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="fk7-JS-Pgl">
@@ -460,6 +460,7 @@
                                                 <constraint firstItem="YHv-7K-5lo" firstAttribute="centerY" secondItem="aJu-Ya-Q4P" secondAttribute="centerY" id="oTT-Us-ZwX"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
                                         <connections>
                                             <outlet property="userImage" destination="aJu-Ya-Q4P" id="XHm-fM-wOn"/>
                                             <outlet property="username" destination="YHv-7K-5lo" id="g7a-iF-5Ch"/>
@@ -488,12 +489,26 @@
                                             <constraint firstAttribute="width" constant="260" id="vdl-eu-H0N"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZ1-ZI-gHn">
+                                        <rect key="frame" x="549" y="27" width="43" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="ghT-4Y-yMp"/>
+                                            <constraint firstAttribute="width" constant="43" id="kYS-6E-zwl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                        <state key="normal" title="+"/>
+                                        <connections>
+                                            <action selector="addFriend:" destination="doX-nH-jMC" eventType="touchUpInside" id="3US-EO-00P"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1192831087" green="0.75766798349999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="NdQ-hN-emZ" secondAttribute="bottom" constant="4" id="2tu-7z-j8x"/>
+                                    <constraint firstItem="wZ1-ZI-gHn" firstAttribute="top" secondItem="gJe-x1-Ope" secondAttribute="top" constant="27" id="Dt9-41-vgX"/>
                                     <constraint firstItem="BvG-t9-4gT" firstAttribute="centerX" secondItem="gJe-x1-Ope" secondAttribute="centerX" id="Gjb-zc-zDH"/>
                                     <constraint firstItem="BvG-t9-4gT" firstAttribute="top" secondItem="gJe-x1-Ope" secondAttribute="top" constant="18" id="Syu-YX-RR0"/>
+                                    <constraint firstAttribute="trailing" secondItem="wZ1-ZI-gHn" secondAttribute="trailing" constant="8" id="daU-I5-5xR"/>
                                     <constraint firstItem="NdQ-hN-emZ" firstAttribute="leading" secondItem="gJe-x1-Ope" secondAttribute="leading" constant="8" id="efK-P2-vod"/>
                                     <constraint firstAttribute="height" constant="60" id="j47-rF-RL6"/>
                                     <constraint firstAttribute="height" constant="80" id="lEc-5v-ikk"/>
