@@ -40,6 +40,7 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
         imageView = UIImageView()
         imageView.frame = previewView.bounds
         imageView.center = previewView.center
+        imageView.contentMode = .ScaleAspectFill
         previewView.addSubview(imageView)
         previewView.sendSubviewToBack(imageView)
         hideEditInterface(true)
