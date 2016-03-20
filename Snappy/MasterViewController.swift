@@ -19,6 +19,7 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
     var capturedImage: UIImage?
     var imageView: UIImageView!
     
+    // interface buttons //
     @IBOutlet weak var captureButton: UIButton!
     @IBOutlet weak var inboxButton: UIButton!
     @IBOutlet weak var friendsListButton: UIButton!
@@ -31,21 +32,19 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
+        // initialing my custom camera interface //
         cameraSession = CameraSession()
         
+        // initializing the image and preview views //
         imageView = UIImageView()
-        imageView.bounds = previewView.bounds
+        imageView.frame = previewView.bounds
         imageView.center = previewView.center
-        previewView.insertSubview(imageView, atIndex: 0)
+        previewView.addSubview(imageView)
+        previewView.sendSubviewToBack(imageView)
         hideEditInterface(true)
         
-        cameraSession.previewLayer.frame = previewView.bounds
+        cameraSession.previewLayer.frame = previewView.frame
         previewView.layer.insertSublayer(cameraSession.previewLayer, atIndex: 0)
         
         cameraSession.startRunning()
@@ -63,6 +62,8 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    // switches the input device in the camera session from front/back //
+    // and vise-versa                                                  //
     @IBAction func didPressFlipCamera(sender: UIButton) {
         let position = cameraSession.device.position
         var newDevice: CameraDevice?
@@ -78,12 +79,13 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
         }
     }
     
+    // exits the edit interface, back to capture interface //
     @IBAction func didPressCancelEdit(sender: UIButton) {
         hideCaptureInterface(false)
         hideEditInterface(true)
     }
 
-    
+    // captures a photo, and enters edit interface //
     @IBAction func didPressCapturePhoto(sender: AnyObject) {
         cameraSession.captureImage( {
                 (let image) in
@@ -93,6 +95,7 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
             } )
     }
     
+    // reveals/hides capture buttons //
     func hideCaptureInterface(hidden: Bool) {
         captureButton.hidden = hidden
         inboxButton.hidden = hidden
@@ -101,13 +104,14 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
         cameraSession.previewLayer.hidden = hidden
     }
     
+    // reveals/hides edit buttons //
     func hideEditInterface(hidden: Bool) {
         cancelButton.hidden = hidden
         imageView.hidden = hidden
     }
     
     
-    // Did Login Successfully
+    // did Login Successfully //
     func didLoginSuccessfully() {
         dismissViewControllerAnimated(true, completion: nil)
     }
