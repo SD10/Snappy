@@ -2,7 +2,7 @@
 //  MasterViewController.swift
 //  Snappy
 //
-//  This is the main view controller, it displays the camera user interface.
+//  This is the main view controller, it displays the camera user-interface.
 //
 //  Created by Steven on 2/24/16.
 //  Copyright © 2016 SwiftSyndicate. All rights reserved.
@@ -15,13 +15,11 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
     
     @IBOutlet var previewView: UIView!
     
-    var captureSession: AVCaptureSession!
-    var stillImageOutput: AVCaptureStillImageOutput!
-    var previewLayer: AVCaptureVideoPreviewLayer!           // the video preview, subLayers previewView
-    var capturedImage: UIImage!
-    var currentCaptureDevice: AVCaptureDevice!
+    var cameraSession: CameraSession!
+    var capturedImage: UIImage?
     var imageView: UIImageView!
     
+    // interface buttons //
     @IBOutlet weak var captureButton: UIButton!
     @IBOutlet weak var inboxButton: UIButton!
     @IBOutlet weak var friendsListButton: UIButton!
@@ -34,44 +32,23 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        // Creating and initializing the capture session w/ photo preset
-        captureSession = AVCaptureSession()
-        captureSession.sessionPreset = AVCaptureSessionPresetPhoto
         
-        // Creating input devices for the front and back cameras
-        let backCamera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        currentCaptureDevice = backCamera
+        // initialing my custom camera interface //
+        cameraSession = CameraSession()
         
-        do {
-            let input = try AVCaptureDeviceInput(device: backCamera)
-            captureSession.addInput(input)
-            print("Assigned back camera input device.")
-        } catch {
-            print("Error: occured when assigning input device.")
-        }
+        // initializing the image and preview views //
+        imageView = UIImageView()
+        imageView.frame = previewView.bounds
+        imageView.center = previewView.center
+        imageView.contentMode = .ScaleAspectFill
+        previewView.addSubview(imageView)
+        previewView.sendSubviewToBack(imageView)
+        hideEditInterface(true)
         
-        // Specifying output as type JPEG
-        stillImageOutput = AVCaptureStillImageOutput()
-        stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
-        captureSession.addOutput(stillImageOutput)
+        cameraSession.previewLayer.frame = previewView.frame
+        previewView.layer.insertSublayer(cameraSession.previewLayer, atIndex: 0)
         
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        
-        // sets the preview to fill entire layer
-        previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-        previewLayer.frame = previewView.bounds
-        previewView.layer.insertSublayer(previewLayer, atIndex: 0)
-        
-        // Begins capture session on separate thread of high priority
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-            self.captureSession.startRunning()
-        }
+        cameraSession.startRunning()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -86,83 +63,56 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    // switches the input device in the camera session from front/back //
+    // and vise-versa                                                  //
     @IBAction func didPressFlipCamera(sender: UIButton) {
-        var newDevice: AVCaptureDevice = currentCaptureDevice
+        let position = cameraSession.device.position
+        var newDevice: CameraDevice?
         
-        if currentCaptureDevice.position == .Back {
-            // front camera device
-            let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
-            for device in devices {
-                if device.position == .Front {
-                    newDevice = device as! AVCaptureDevice
-                    currentCaptureDevice = newDevice
-                }
-            }
-        } else if currentCaptureDevice.position == .Front {
-            // back camera device
-            newDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-            currentCaptureDevice = newDevice
-            
+        switch position {
+        case .Front: newDevice = CameraDevice(position: .Back)
+        case .Back: newDevice = CameraDevice(position: .Front)
+        default: newDevice = nil
         }
         
-        do {
-            let newInput = try AVCaptureDeviceInput(device: newDevice)
-            // FIX, FIX, FIX!!!
-            let currentInput = captureSession.inputs[0] as! AVCaptureInput
-            captureSession.beginConfiguration()
-            captureSession.removeInput(currentInput)
-            captureSession.addInput(newInput)
-            captureSession.commitConfiguration()
-            
-            print("Successfully flipped the cameara!")
-        } catch {
-            print("Error: occured when assigning input device in flip camera.")
+        if newDevice != nil {
+            cameraSession.updateCameraDevice(to: newDevice!)
         }
     }
     
+    // exits the edit interface, back to capture interface //
     @IBAction func didPressCancelEdit(sender: UIButton) {
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-            self.captureSession.startRunning()
-        }
-        imageView.hidden = true
-        hideEditInterface(true)
         hideCaptureInterface(false)
+        hideEditInterface(true)
     }
 
-    
+    // captures a photo, and enters edit interface //
     @IBAction func didPressCapturePhoto(sender: AnyObject) {
-        let videoConnection = stillImageOutput.connectionWithMediaType(AVMediaTypeVideo)
-        stillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection) {
-            (let buffer, let error) in
-            if error != nil {
-                print("Error occured when capturing image: \(error)")
-            } else {
-                let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
-                self.capturedImage = UIImage(data: imageData)
-                print("Image capture success!")
-            }
-        }
-        
-        imageView = UIImageView(image: capturedImage)
-        imageView.bounds = previewView.bounds
-        previewView.addSubview(imageView)
-        hideCaptureInterface(true)
-        hideEditInterface(false)
-        captureSession.stopRunning()
+        cameraSession.captureImage( {
+                (let image) in
+            self.imageView.image = image
+            self.hideCaptureInterface(true)
+            self.hideEditInterface(false)
+            } )
     }
     
+    // reveals/hides capture buttons //
     func hideCaptureInterface(hidden: Bool) {
         captureButton.hidden = hidden
-        friendsListButton.hidden = hidden
         inboxButton.hidden = hidden
+        friendsListButton.hidden = hidden
         flipButton.hidden = hidden
+        cameraSession.previewLayer.hidden = hidden
     }
     
+    // reveals/hides edit buttons //
     func hideEditInterface(hidden: Bool) {
         cancelButton.hidden = hidden
+        imageView.hidden = hidden
     }
     
-    // Did Login Successfully
+    
+    // did Login Successfully //
     func didLoginSuccessfully() {
         dismissViewControllerAnimated(true, completion: nil)
     }
