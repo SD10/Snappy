@@ -152,6 +152,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.showErrorAlert("Could not create account", message: "Try something else?")
                 } else {
                     self.logUserIn()
+                    let result = result as! [String: String]
+                    let user = ["provider": "password", "email": "\(self.emailTextField.text!)", "password": "\(self.passwordTextField.text!)"]
+                    DataService.dataService.createFirebaseUser(result["uid"]!, user: user)
                     self.performSegueWithIdentifier("addInformation", sender: nil)
                 }
             })
