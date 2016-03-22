@@ -10,11 +10,18 @@ import UIKit
 
 class MessageViewController: UIViewController {
 
-    var receiver: User?
     @IBOutlet weak var inputTextField: UITextField!
+    @IBOutlet weak var selectedImage: UIImageView!
+    var image: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let image = image {
+            selectedImage.image = image
+        } else {
+            selectedImage.image = UIImage(named: "imagesplaceholder.png")
+        }
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleKeyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
     }
 
@@ -23,7 +30,8 @@ class MessageViewController: UIViewController {
         
     }
     
-    func handleKeyboardDidShow(notification: NSNotification) {
+    // FIXME: - Not working move keyboard
+    /*func handleKeyboardDidShow(notification: NSNotification) {
         // Get the frame of the keyboard
         let keyboardRectAsObject = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         // Place it in a CGRect
@@ -33,7 +41,7 @@ class MessageViewController: UIViewController {
         inputTextField.center.x = view.center.x
         inputTextField.frame.size = CGSize(width: view.frame.size.width, height: 30.0)
         inputTextField.center.y = keyboardRect.height + 138
-    }
+    } */
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)

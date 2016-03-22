@@ -44,7 +44,6 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             }
         })
-   
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,11 +80,6 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    //Did select a tableView row
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-    }
-    
     // Give the section a header of "Friends"
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Friends"
@@ -120,12 +114,5 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         presentViewController(alert, animated: true, completion: nil)
 
-    }
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "sendMessage" {
-            let viewController = segue.destinationViewController as? MessageViewController
-            let indexPath = tableView.indexPathForSelectedRow?.row
-        }
     }
 }
