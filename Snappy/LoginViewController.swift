@@ -24,7 +24,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var facebookButton: UIButton!
-    var delegate: LoginViewControllerDelegate?
     var player = AVAudioPlayer()
     
     // MARK: - View Life Cycle
@@ -93,7 +92,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func logUserIn() {
         if checkTextFields() {
             DataService.dataService.REF_USERS.authUser(emailTextField.text!, password: passwordTextField.text!, withCompletionBlock: { error, authData in
+                print("start login")
                 if error != nil {
+                    print(error)
                     switch error.code {
                     case STATUS_EMAIL_INVALID:
                         self.showErrorAlert("Invalid Email", message: "Please enter a valid email")
@@ -101,8 +102,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         self.showErrorAlert("Email or Password Invalid", message: "Please enter a valid email and password")
                     default: break
                     }
-                } else {
-                    NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
                 }
             })
         }
@@ -130,7 +129,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         let user = ["provider": authData.provider!, "displayName": authData.providerData["displayName"]!, "email": authData.providerData["email"]!, "profileImage": authData.providerData["profileImageURL"]!]
                         DataService.dataService.createFirebaseUser(authData.uid, user: user)
                         NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
-                        self.delegate?.didLoginSuccessfully()
+                        self.dismissViewControllerAnimated(true, completion: nil)
                     }
                 })
             }
@@ -140,7 +139,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // Email-Password Login Attempt
     @IBAction func attemptLogin(sender: UIButton) {
         logUserIn()
-        self.delegate?.didLoginSuccessfully()
+        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     
@@ -154,6 +155,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.logUserIn()
                     let result = result as! [String: String]
                     let user = ["provider": "password", "email": "\(self.emailTextField.text!)", "password": "\(self.passwordTextField.text!)"]
+                    NSUserDefaults.standardUserDefaults().setValue(result["uid"]!, forKey: KEY_UID)
                     DataService.dataService.createFirebaseUser(result["uid"]!, user: user)
                     self.performSegueWithIdentifier("addInformation", sender: nil)
                 }

@@ -11,7 +11,7 @@
 import UIKit
 import AVFoundation
 
-class MasterViewController: UIViewController, LoginViewControllerDelegate {
+class MasterViewController: UIViewController {
     
     @IBOutlet var previewView: UIView!
     
@@ -118,17 +118,8 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
         imageView.hidden = hidden
     }
     
-    
-    // did Login Successfully //
-    func didLoginSuccessfully() {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "presentLogin" {
-            let loginViewController = segue.destinationViewController as! LoginViewController
-            loginViewController.delegate = self
-        } else if segue.identifier == "sendMessage" {
+        if segue.identifier == "sendMessage" {
             let messageViewController = segue.destinationViewController as! MessageViewController
             messageViewController.image = capturedImage
         }
