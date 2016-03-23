@@ -121,7 +121,7 @@ class MasterViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "sendMessage" {
             let messageViewController = segue.destinationViewController as! MessageViewController
-            messageViewController.image = capturedImage
+            messageViewController.image = imageView.image
         }
     }
 }

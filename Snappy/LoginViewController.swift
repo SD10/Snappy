@@ -25,6 +25,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var facebookButton: UIButton!
     var player = AVAudioPlayer()
+    var newUser = false
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -102,6 +103,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         self.showErrorAlert("Email or Password Invalid", message: "Please enter a valid email and password")
                     default: break
                     }
+                } else {
+                    NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
+                    self.newUser = false
                 }
             })
         }
@@ -139,7 +143,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // Email-Password Login Attempt
     @IBAction func attemptLogin(sender: UIButton) {
         logUserIn()
-        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
+        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil && newUser == false {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
@@ -152,6 +156,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 if error != nil {
                     self.showErrorAlert("Could not create account", message: "Try something else?")
                 } else {
+                    self.newUser = true
                     self.logUserIn()
                     let result = result as! [String: String]
                     let user = ["provider": "password", "email": "\(self.emailTextField.text!)", "password": "\(self.passwordTextField.text!)"]
