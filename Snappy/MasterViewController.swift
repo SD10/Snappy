@@ -102,11 +102,14 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
         // a bit redundant, refactor later //
         let currentDevice = cameraSession.device.device
         
+        // FIX: the trashcan of dead kittens //
         do {
             try currentDevice!.lockForConfiguration()
-            if currentDevice!.focusPointOfInterestSupported {
-                currentDevice!.focusPointOfInterest = tapToFocus.locationInView(previewView)
-                print(tapToFocus.locationInView(previewView))
+            if currentDevice!.focusPointOfInterestSupported && currentDevice!.isFocusModeSupported(.AutoFocus) {
+                currentDevice!.focusMode = .AutoFocus
+                let focalPoint = cameraSession.previewLayer.captureDevicePointOfInterestForPoint(tapToFocus.locationInView(previewView))
+                currentDevice!.focusPointOfInterest = focalPoint
+                print(focalPoint)
             }
             currentDevice!.unlockForConfiguration()
         } catch {
