@@ -47,9 +47,12 @@ class MessageViewController: UIViewController {
         self.view.endEditing(true)
     }
 
-    @IBAction func sendMessageButton(sender: AnyObject) {
+    @IBAction func onCancelPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
 
+    @IBAction func onSendPressed(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 
 }
