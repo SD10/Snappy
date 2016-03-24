@@ -413,7 +413,7 @@
                         <outlet property="friendsListButton" destination="GL0-cw-0FZ" id="LhO-Ze-S1a"/>
                         <outlet property="inboxButton" destination="emk-7I-HRd" id="F2Y-Pl-VLr"/>
                         <outlet property="previewView" destination="8bC-Xf-vdC" id="gcH-Ax-OdB"/>
-                        <outlet property="tapToFocus" destination="r8p-gA-mTg" id="leC-oX-pXa"/>
+                        <outlet property="tapGesture" destination="r8p-gA-mTg" id="FbN-eS-OL0"/>
                         <segue destination="yhm-am-2iw" kind="show" identifier="presentLogin" id="dQ0-Ow-vpB"/>
                     </connections>
                 </viewController>

@@ -13,9 +13,9 @@ import AVFoundation
 
 class MasterViewController: UIViewController, LoginViewControllerDelegate {
     
+    @IBOutlet var tapGesture: UITapGestureRecognizer!
     @IBOutlet var previewView: UIView!
     
-    @IBOutlet var tapToFocus: UITapGestureRecognizer!
     var cameraSession: CameraSession!
     var capturedImage: UIImage?
     var imageView: UIImageView!
@@ -107,7 +107,7 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
             try currentDevice!.lockForConfiguration()
             if currentDevice!.focusPointOfInterestSupported && currentDevice!.isFocusModeSupported(.AutoFocus) {
                 currentDevice!.focusMode = .AutoFocus
-                let focalPoint = cameraSession.previewLayer.captureDevicePointOfInterestForPoint(tapToFocus.locationInView(previewView))
+                let focalPoint = cameraSession.previewLayer.captureDevicePointOfInterestForPoint(tapGesture.locationInView(previewView))
                 currentDevice!.focusPointOfInterest = focalPoint
                 print(focalPoint)
             }
