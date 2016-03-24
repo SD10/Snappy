@@ -30,8 +30,8 @@ class MessageViewController: UIViewController {
         
     }
     
-    // FIXME: - Not working move keyboard
-    /*func handleKeyboardDidShow(notification: NSNotification) {
+    // FIXME: - Works but looks terrible...
+    func handleKeyboardDidShow(notification: NSNotification) {
         // Get the frame of the keyboard
         let keyboardRectAsObject = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         // Place it in a CGRect
@@ -39,9 +39,9 @@ class MessageViewController: UIViewController {
         keyboardRectAsObject.getValue(&keyboardRect)
         //Give a bottom margin to our text field that makes it reach to the top of the keyboard
         inputTextField.center.x = view.center.x
-        inputTextField.frame.size = CGSize(width: view.frame.size.width, height: 30.0)
+        inputTextField.frame.size = CGSize(width: view.frame.size.width, height: 40.0)
         inputTextField.center.y = keyboardRect.height + 138
-    } */
+    }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
