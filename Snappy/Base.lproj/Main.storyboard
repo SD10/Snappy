@@ -389,6 +389,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.86666666670000003" green="0.85882352939999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="emk-7I-HRd" firstAttribute="leading" secondItem="C3C-Fn-ika" secondAttribute="trailing" constant="90" id="3Am-f1-dYT"/>
                             <constraint firstItem="C3C-Fn-ika" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5li-Xk-GKC"/>
@@ -401,6 +402,9 @@
                             <constraint firstItem="emk-7I-HRd" firstAttribute="centerY" secondItem="GL0-cw-0FZ" secondAttribute="centerY" id="gOY-PN-KZ4"/>
                             <constraint firstItem="C3C-Fn-ika" firstAttribute="leading" secondItem="GL0-cw-0FZ" secondAttribute="trailing" constant="90" id="to1-rL-9Of"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="r8p-gA-mTg" appends="YES" id="vpS-E4-VMi"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="ZaG-rg-sSA" id="cpQ-R4-iOe"/>
@@ -409,10 +413,16 @@
                         <outlet property="friendsListButton" destination="GL0-cw-0FZ" id="LhO-Ze-S1a"/>
                         <outlet property="inboxButton" destination="emk-7I-HRd" id="F2Y-Pl-VLr"/>
                         <outlet property="previewView" destination="8bC-Xf-vdC" id="gcH-Ax-OdB"/>
+                        <outlet property="tapToFocus" destination="r8p-gA-mTg" id="leC-oX-pXa"/>
                         <segue destination="yhm-am-2iw" kind="show" identifier="presentLogin" id="dQ0-Ow-vpB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="r8p-gA-mTg">
+                    <connections>
+                        <action selector="tapToFocusCamera:" destination="BYZ-38-t0r" id="Ej6-GL-EE5"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-453" y="403"/>
         </scene>

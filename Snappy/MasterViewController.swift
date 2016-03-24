@@ -15,6 +15,7 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
     
     @IBOutlet var previewView: UIView!
     
+    @IBOutlet var tapToFocus: UITapGestureRecognizer!
     var cameraSession: CameraSession!
     var capturedImage: UIImage?
     var imageView: UIImageView!
@@ -95,6 +96,24 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
             self.hideEditInterface(false)
             } )
     }
+    
+    // will focus the camera at the point the user taps //
+    @IBAction func tapToFocusCamera(sender: UITapGestureRecognizer) {
+        // a bit redundant, refactor later //
+        let currentDevice = cameraSession.device.device
+        
+        do {
+            try currentDevice!.lockForConfiguration()
+            if currentDevice!.focusPointOfInterestSupported {
+                currentDevice!.focusPointOfInterest = tapToFocus.locationInView(previewView)
+                print(tapToFocus.locationInView(previewView))
+            }
+            currentDevice!.unlockForConfiguration()
+        } catch {
+            print("Error: did not obtain lock for device configuration.")
+        }
+    }
+
     
     // reveals/hides capture buttons //
     func hideCaptureInterface(hidden: Bool) {
