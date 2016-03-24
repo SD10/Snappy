@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sTB-zj-soc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -12,6 +12,7 @@
             <string>NotoSans-Bold</string>
         </mutableArray>
         <mutableArray key="NotoSans-Regular.ttf">
+            <string>NotoSans</string>
             <string>NotoSans</string>
             <string>NotoSans</string>
             <string>NotoSans</string>
@@ -586,47 +587,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmX-rZ-iZU">
-                                <rect key="frame" x="0.0" y="540" width="600" height="60"/>
-                                <color key="backgroundColor" red="0.23921568630000001" green="0.70196078429999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="6YI-Wc-M3d"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="18"/>
-                                <state key="normal" title="Send Message">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="sendMessageButton:" destination="sTB-zj-soc" eventType="touchUpInside" id="PZ5-wG-aEq"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagesplaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="do6-TM-aWn">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagesplaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="fRr-Xl-QgC">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a message to send" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oru-Ox-ytB">
-                                <rect key="frame" x="0.0" y="510" width="600" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="veu-hY-9aT">
+                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBd-QJ-f5E">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
+                                        <color key="backgroundColor" red="0.23921568630000001" green="0.70196078429999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="18"/>
+                                        <state key="normal" title="Send">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onSendPressed:" destination="sTB-zj-soc" eventType="touchUpInside" id="DCz-R5-CSS"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HdN-1S-GBB">
+                                        <rect key="frame" x="300" y="0.0" width="300" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.17670107030000001" blue="0.16565128060000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="18"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onCancelPressed:" destination="sTB-zj-soc" eventType="touchUpInside" id="qCm-l3-Gfw"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="b9b-Eq-uFw"/>
+                                </constraints>
+                            </stackView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a message to send..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DSt-gH-D2o">
+                                <rect key="frame" x="0.0" y="510" width="600" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Nn9-3E-hWr"/>
+                                </constraints>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Km5-bB-xu4" firstAttribute="top" secondItem="pmX-rZ-iZU" secondAttribute="bottom" id="Lpj-8i-fPa"/>
-                            <constraint firstAttribute="trailing" secondItem="pmX-rZ-iZU" secondAttribute="trailing" id="Mna-6H-Kne"/>
-                            <constraint firstItem="pmX-rZ-iZU" firstAttribute="leading" secondItem="pi1-d0-wIs" secondAttribute="leading" id="Rwe-Jo-VaP"/>
-                            <constraint firstAttribute="trailing" secondItem="oru-Ox-ytB" secondAttribute="trailing" id="TFZ-6Y-PTY"/>
-                            <constraint firstItem="do6-TM-aWn" firstAttribute="top" secondItem="pi1-d0-wIs" secondAttribute="top" id="Wac-hm-R1b"/>
-                            <constraint firstItem="pmX-rZ-iZU" firstAttribute="top" secondItem="do6-TM-aWn" secondAttribute="bottom" id="YeB-yS-ner"/>
-                            <constraint firstItem="oru-Ox-ytB" firstAttribute="leading" secondItem="pi1-d0-wIs" secondAttribute="leading" id="ZHm-vS-Zfm"/>
-                            <constraint firstItem="do6-TM-aWn" firstAttribute="leading" secondItem="pi1-d0-wIs" secondAttribute="leading" id="cpf-Hd-U9h"/>
-                            <constraint firstItem="oru-Ox-ytB" firstAttribute="centerX" secondItem="pi1-d0-wIs" secondAttribute="centerX" id="d7y-Do-vYf"/>
-                            <constraint firstItem="pmX-rZ-iZU" firstAttribute="top" secondItem="oru-Ox-ytB" secondAttribute="bottom" id="qml-lK-yzb"/>
-                            <constraint firstAttribute="trailing" secondItem="do6-TM-aWn" secondAttribute="trailing" id="zWx-ur-uCp"/>
+                            <constraint firstItem="DSt-gH-D2o" firstAttribute="top" secondItem="fRr-Xl-QgC" secondAttribute="bottom" id="1eU-pc-aHE"/>
+                            <constraint firstItem="Km5-bB-xu4" firstAttribute="top" secondItem="veu-hY-9aT" secondAttribute="bottom" id="85c-33-pgL"/>
+                            <constraint firstAttribute="trailing" secondItem="DSt-gH-D2o" secondAttribute="trailing" id="8dm-Oa-gaH"/>
+                            <constraint firstItem="veu-hY-9aT" firstAttribute="top" secondItem="DSt-gH-D2o" secondAttribute="bottom" id="Egy-sa-fAG"/>
+                            <constraint firstAttribute="trailing" secondItem="veu-hY-9aT" secondAttribute="trailing" id="LvD-Co-Tbq"/>
+                            <constraint firstItem="fRr-Xl-QgC" firstAttribute="top" secondItem="pi1-d0-wIs" secondAttribute="top" id="RyA-eO-AGz"/>
+                            <constraint firstItem="DSt-gH-D2o" firstAttribute="leading" secondItem="pi1-d0-wIs" secondAttribute="leading" id="WRX-iR-ila"/>
+                            <constraint firstAttribute="trailing" secondItem="fRr-Xl-QgC" secondAttribute="trailing" id="Xw3-Ty-QzE"/>
+                            <constraint firstItem="veu-hY-9aT" firstAttribute="leading" secondItem="pi1-d0-wIs" secondAttribute="leading" id="md2-Rb-aV6"/>
+                            <constraint firstItem="fRr-Xl-QgC" firstAttribute="leading" secondItem="pi1-d0-wIs" secondAttribute="leading" id="pPW-G2-oZD"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="inputTextField" destination="oru-Ox-ytB" id="LSS-0q-0MC"/>
-                        <outlet property="selectedImage" destination="do6-TM-aWn" id="7Y8-Jw-mGl"/>
+                        <outlet property="inputTextField" destination="DSt-gH-D2o" id="0VI-FE-1m3"/>
+                        <outlet property="selectedImage" destination="fRr-Xl-QgC" id="Xep-vP-aVZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hJR-rV-ws4" userLabel="First Responder" sceneMemberID="firstResponder"/>
