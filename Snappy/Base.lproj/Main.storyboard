@@ -18,6 +18,7 @@
             <string>NotoSans</string>
             <string>NotoSans</string>
             <string>NotoSans</string>
+            <string>NotoSans</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -223,7 +224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kVC-m4-cMJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="580" y="682"/>
+            <point key="canvasLocation" x="900" y="678"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="fk7-JS-Pgl">
@@ -326,7 +327,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gom-sQ-Rfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="580" y="-130"/>
+            <point key="canvasLocation" x="900" y="-444"/>
         </scene>
         <!--Master View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -387,16 +388,33 @@
                                     <action selector="didPressCancelEdit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="poY-3o-G2N"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZY-Bn-qtY">
+                                <rect key="frame" x="518" y="28" width="69" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="GOo-xA-wUA"/>
+                                    <constraint firstAttribute="width" constant="69" id="cNu-bi-9Ey"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Send">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didPressSendMessage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Y5-Ck-aTi"/>
+                                    <segue destination="sTB-zj-soc" kind="presentation" identifier="sendMessage" id="Ekt-Y7-1dm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.86666666670000003" green="0.85882352939999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="emk-7I-HRd" firstAttribute="leading" secondItem="C3C-Fn-ika" secondAttribute="trailing" constant="90" id="3Am-f1-dYT"/>
                             <constraint firstItem="C3C-Fn-ika" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5li-Xk-GKC"/>
+                            <constraint firstItem="xjv-K4-5aK" firstAttribute="centerY" secondItem="PZY-Bn-qtY" secondAttribute="centerY" id="Iga-f0-ZIg"/>
                             <constraint firstAttribute="trailing" secondItem="xjv-K4-5aK" secondAttribute="trailing" constant="20" id="Lq8-l4-V6T"/>
                             <constraint firstItem="xjv-K4-5aK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="MAB-O1-o9Q"/>
                             <constraint firstItem="ZaG-rg-sSA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="Nhc-tj-JnP"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="C3C-Fn-ika" secondAttribute="bottom" constant="20" id="OGk-6b-0h2"/>
+                            <constraint firstItem="xjv-K4-5aK" firstAttribute="centerX" secondItem="PZY-Bn-qtY" secondAttribute="centerX" id="QZb-mc-iG5"/>
                             <constraint firstItem="C3C-Fn-ika" firstAttribute="centerY" secondItem="GL0-cw-0FZ" secondAttribute="centerY" id="RDh-Xf-RRq"/>
                             <constraint firstItem="xjv-K4-5aK" firstAttribute="baseline" secondItem="ZaG-rg-sSA" secondAttribute="baseline" id="byN-5M-20t"/>
                             <constraint firstItem="emk-7I-HRd" firstAttribute="centerY" secondItem="GL0-cw-0FZ" secondAttribute="centerY" id="gOY-PN-KZ4"/>
@@ -414,6 +432,7 @@
                         <outlet property="inboxButton" destination="emk-7I-HRd" id="F2Y-Pl-VLr"/>
                         <outlet property="previewView" destination="8bC-Xf-vdC" id="gcH-Ax-OdB"/>
                         <outlet property="tapGesture" destination="r8p-gA-mTg" id="FbN-eS-OL0"/>
+                        <outlet property="sendButton" destination="PZY-Bn-qtY" id="pv0-Ak-mPV"/>
                         <segue destination="yhm-am-2iw" kind="show" identifier="presentLogin" id="dQ0-Ow-vpB"/>
                     </connections>
                 </viewController>
@@ -553,7 +572,66 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2mM-1R-1ao" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-790" y="1200"/>
+            <point key="canvasLocation" x="-1204" y="1259"/>
+        </scene>
+        <!--Message View Controller-->
+        <scene sceneID="MJq-oC-pUe">
+            <objects>
+                <viewController id="sTB-zj-soc" customClass="MessageViewController" customModule="Snappy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fIV-Nc-eRm"/>
+                        <viewControllerLayoutGuide type="bottom" id="Km5-bB-xu4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pi1-d0-wIs">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmX-rZ-iZU">
+                                <rect key="frame" x="0.0" y="540" width="600" height="60"/>
+                                <color key="backgroundColor" red="0.23921568630000001" green="0.70196078429999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="6YI-Wc-M3d"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NotoSans" family="Noto Sans" pointSize="18"/>
+                                <state key="normal" title="Send Message">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendMessageButton:" destination="sTB-zj-soc" eventType="touchUpInside" id="PZ5-wG-aEq"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagesplaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="do6-TM-aWn">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a message to send" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oru-Ox-ytB">
+                                <rect key="frame" x="0.0" y="510" width="600" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Km5-bB-xu4" firstAttribute="top" secondItem="pmX-rZ-iZU" secondAttribute="bottom" id="Lpj-8i-fPa"/>
+                            <constraint firstAttribute="trailing" secondItem="pmX-rZ-iZU" secondAttribute="trailing" id="Mna-6H-Kne"/>
+                            <constraint firstItem="pmX-rZ-iZU" firstAttribute="leading" secondItem="pi1-d0-wIs" secondAttribute="leading" id="Rwe-Jo-VaP"/>
+                            <constraint firstAttribute="trailing" secondItem="oru-Ox-ytB" secondAttribute="trailing" id="TFZ-6Y-PTY"/>
+                            <constraint firstItem="do6-TM-aWn" firstAttribute="top" secondItem="pi1-d0-wIs" secondAttribute="top" id="Wac-hm-R1b"/>
+                            <constraint firstItem="pmX-rZ-iZU" firstAttribute="top" secondItem="do6-TM-aWn" secondAttribute="bottom" id="YeB-yS-ner"/>
+                            <constraint firstItem="oru-Ox-ytB" firstAttribute="leading" secondItem="pi1-d0-wIs" secondAttribute="leading" id="ZHm-vS-Zfm"/>
+                            <constraint firstItem="do6-TM-aWn" firstAttribute="leading" secondItem="pi1-d0-wIs" secondAttribute="leading" id="cpf-Hd-U9h"/>
+                            <constraint firstItem="oru-Ox-ytB" firstAttribute="centerX" secondItem="pi1-d0-wIs" secondAttribute="centerX" id="d7y-Do-vYf"/>
+                            <constraint firstItem="pmX-rZ-iZU" firstAttribute="top" secondItem="oru-Ox-ytB" secondAttribute="bottom" id="qml-lK-yzb"/>
+                            <constraint firstAttribute="trailing" secondItem="do6-TM-aWn" secondAttribute="trailing" id="zWx-ur-uCp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="inputTextField" destination="oru-Ox-ytB" id="LSS-0q-0MC"/>
+                        <outlet property="selectedImage" destination="do6-TM-aWn" id="7Y8-Jw-mGl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hJR-rV-ws4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-453" y="1259"/>
         </scene>
         <!--Inbox View Controller-->
         <scene sceneID="Ea7-8s-Q5f">
@@ -600,7 +678,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PyP-or-yjQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-98" y="1200"/>
+            <point key="canvasLocation" x="328" y="1259"/>
         </scene>
     </scenes>
     <resources>

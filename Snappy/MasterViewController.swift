@@ -11,7 +11,7 @@
 import UIKit
 import AVFoundation
 
-class MasterViewController: UIViewController, LoginViewControllerDelegate {
+class MasterViewController: UIViewController {
     
     @IBOutlet var tapGesture: UITapGestureRecognizer!
     @IBOutlet var previewView: UIView!
@@ -25,6 +25,7 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
     @IBOutlet weak var inboxButton: UIButton!
     @IBOutlet weak var friendsListButton: UIButton!
     @IBOutlet weak var flipButton: UIButton!
+    @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton! {
         didSet {
             cancelButton.hidden = true
@@ -86,6 +87,11 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
         hideCaptureInterface(false)
         hideEditInterface(true)
     }
+    
+    // modally presents the send message view //
+    @IBAction func didPressSendMessage(sender: AnyObject) {
+        
+    }
 
     // captures a photo, and enters edit interface //
     @IBAction func didPressCapturePhoto(sender: AnyObject) {
@@ -130,19 +136,14 @@ class MasterViewController: UIViewController, LoginViewControllerDelegate {
     // reveals/hides edit buttons //
     func hideEditInterface(hidden: Bool) {
         cancelButton.hidden = hidden
+        sendButton.hidden = hidden
         imageView.hidden = hidden
     }
     
-    
-    // did Login Successfully //
-    func didLoginSuccessfully() {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "presentLogin" {
-            let loginViewController = segue.destinationViewController as! LoginViewController
-            loginViewController.delegate = self
+        if segue.identifier == "sendMessage" {
+            let messageViewController = segue.destinationViewController as! MessageViewController
+            messageViewController.image = imageView.image
         }
     }
 }
