@@ -24,8 +24,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var facebookButton: UIButton!
-    var player = AVAudioPlayer()
     var newUser = false
+    var player = AVAudioPlayer()
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -104,8 +104,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     default: break
                     }
                 } else {
-                    NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
-                    self.newUser = false
+                    if !self.newUser {
+                        NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    }
                 }
             })
         }
@@ -143,9 +145,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // Email-Password Login Attempt
     @IBAction func attemptLogin(sender: UIButton) {
         logUserIn()
-        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil && newUser == false {
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }
     }
     
     
