@@ -22,7 +22,7 @@ class MessageViewController: UIViewController {
             selectedImage.image = UIImage(named: "imagesplaceholder.png")
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleKeyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MessageViewController.handleKeyboardDidShow(_:)), name: UIKeyboardDidShowNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {

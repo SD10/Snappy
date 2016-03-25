@@ -72,7 +72,7 @@ class SignUpInfoViewController: UIViewController, UIImagePickerControllerDelegat
         penguinImage.startAnimating()
         self.animationsPlayed += 1
         
-        let _ = NSTimer.scheduledTimerWithTimeInterval(0.7, target: self, selector: "updateMessageLabel", userInfo: nil, repeats: false)
+        let _ = NSTimer.scheduledTimerWithTimeInterval(0.7, target: self, selector: #selector(SignUpInfoViewController.updateMessageLabel), userInfo: nil, repeats: false)
     }
     
     // Animation after
@@ -89,7 +89,7 @@ class SignUpInfoViewController: UIViewController, UIImagePickerControllerDelegat
         penguinImage.animationRepeatCount = 1
         penguinImage.startAnimating()
         
-        let _ = NSTimer.scheduledTimerWithTimeInterval(0.7, target: self, selector: "updateMessageLabelTwo", userInfo: nil, repeats: false)
+        let _ = NSTimer.scheduledTimerWithTimeInterval(0.7, target: self, selector: #selector(SignUpInfoViewController.updateMessageLabelTwo), userInfo: nil, repeats: false)
     }
     
     // MARK: - UILabel Formatting

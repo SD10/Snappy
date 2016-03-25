@@ -17,6 +17,8 @@ protocol LoginViewControllerDelegate {
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
+    // TODO: - Ok
+    
     // MARK: - @IBOutlets
     @IBOutlet weak var loginBackground: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
@@ -42,7 +44,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         formatButton(signupButton)
         
         prepareCameraSound()
-        let _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "flashEffect", userInfo: nil, repeats: false)
+        let _ = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(LoginViewController.flashEffect), userInfo: nil, repeats: false)
     }
 
     override func didReceiveMemoryWarning() {
