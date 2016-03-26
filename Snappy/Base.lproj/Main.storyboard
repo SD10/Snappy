@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sTB-zj-soc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sTB-zj-soc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -432,8 +432,8 @@
                         <outlet property="friendsListButton" destination="GL0-cw-0FZ" id="LhO-Ze-S1a"/>
                         <outlet property="inboxButton" destination="emk-7I-HRd" id="F2Y-Pl-VLr"/>
                         <outlet property="previewView" destination="8bC-Xf-vdC" id="gcH-Ax-OdB"/>
-                        <outlet property="tapGesture" destination="r8p-gA-mTg" id="FbN-eS-OL0"/>
                         <outlet property="sendButton" destination="PZY-Bn-qtY" id="pv0-Ak-mPV"/>
+                        <outlet property="tapGesture" destination="r8p-gA-mTg" id="FbN-eS-OL0"/>
                         <segue destination="yhm-am-2iw" kind="show" identifier="presentLogin" id="dQ0-Ow-vpB"/>
                     </connections>
                 </viewController>

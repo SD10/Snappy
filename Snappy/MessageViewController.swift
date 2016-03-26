@@ -52,7 +52,16 @@ class MessageViewController: UIViewController {
     }
 
     @IBAction func onSendPressed(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+        if !inputTextField.text!.isEmpty {
+            let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
+            DataService.dataService.REF_BASE.childByAppendingPath("messages").childByAutoId().setValue(["message": inputTextField.text!, "sender": uid, "receiver": "receiverUID"])
+            dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            let alertController = UIAlertController(title: "Error", message: "Please enter a message to send", preferredStyle: .Alert)
+            let actionOk = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            alertController.addAction(actionOk)
+            presentViewController(alertController, animated: true, completion: nil)
+        }
     }
 
 }
