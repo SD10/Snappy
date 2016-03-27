@@ -108,6 +108,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 } else {
                     if !self.newUser {
                         NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
+                        NSUserDefaults.standardUserDefaults().synchronize()
                         self.dismissViewControllerAnimated(true, completion: nil)
                     }
                 }
@@ -137,6 +138,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         let user = ["provider": authData.provider!, "displayName": authData.providerData["displayName"]!, "email": authData.providerData["email"]!, "profileImage": authData.providerData["profileImageURL"]!]
                         DataService.dataService.createFirebaseUser(authData.uid, user: user)
                         NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
+                        NSUserDefaults.standardUserDefaults().synchronize()
                         self.dismissViewControllerAnimated(true, completion: nil)
                     }
                 })
@@ -162,6 +164,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     let result = result as! [String: String]
                     let user = ["provider": "password", "email": "\(self.emailTextField.text!)", "password": "\(self.passwordTextField.text!)"]
                     NSUserDefaults.standardUserDefaults().setValue(result["uid"]!, forKey: KEY_UID)
+                    NSUserDefaults.standardUserDefaults().synchronize()
                     DataService.dataService.createFirebaseUser(result["uid"]!, user: user)
                     self.performSegueWithIdentifier("addInformation", sender: nil)
                 }
