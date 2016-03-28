@@ -16,6 +16,7 @@ class MessageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        formatMessageTextField()
         if let image = image {
             selectedImage.image = image
         } else {
@@ -28,6 +29,16 @@ class MessageViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
+    }
+    
+    func formatMessageTextField() {
+        inputTextField.borderStyle = .Line
+        inputTextField.clearButtonMode = .WhileEditing
+        inputTextField.textColor = UIColor.whiteColor()
+        inputTextField.backgroundColor = UIColor.darkGrayColor()
+        inputTextField.layer.borderColor = UIColor.blackColor().CGColor
+        inputTextField.layer.borderWidth = 1
+        inputTextField.attributedPlaceholder = NSAttributedString(string: "Enter a message...", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
     }
     
     // FIXME: - Works but looks terrible...
